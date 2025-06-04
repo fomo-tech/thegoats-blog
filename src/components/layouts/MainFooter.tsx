@@ -8,7 +8,7 @@ const MainFooter = () => {
                     <div className="row d-flex align-items-center gy-4">
                         {/* copyright text */}
                         <div className="col-md-4">
-                            <span className="copyright">© 2021 Katen. Template by ThemeGer.</span>
+                            <span className="copyright">© {new Date().getFullYear()} Katen. Template by ThemeGer.</span>
                         </div>
                         {/* social icons */}
                         <div className="col-md-4 text-center">
