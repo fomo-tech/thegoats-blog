@@ -4,7 +4,7 @@ import '@/styles/main/index.css'
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
     return (
         <html>
-            <body suppressHydrationWarning={true}>
+            <body suppressHydrationWarning={true} >
                 {/* Không có header/footer hoặc bạn có thể custom riêng */}
                 <MainLayout>
                     {children}
