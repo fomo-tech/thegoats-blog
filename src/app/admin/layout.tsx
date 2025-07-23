@@ -1,26 +1,24 @@
 import '@/styles/admin/index.css'
 import { ToastContainer } from 'react-toastify'
 import { AdminProviders } from './AdminProvider'
-import NavAdmin from '@/components/layouts/admin/NavAdmin'
-import HeaderAdmin from '@/components/layouts/admin/HeaderAdmin'
+import { createServerComponentClient } from '@supabase/auth-helpers-nextjs'
+import { cookies } from 'next/headers'
 
-export default function AdminLayout({ children }: { children: React.ReactNode }) {
+
+export default async function AdminLayout({ children }: { children: React.ReactNode }) {
+    const supabase = createServerComponentClient({ cookies })
+    const {
+        data: { session },
+    } = await supabase.auth.getSession()
+
     return (
         <html suppressHydrationWarning>
 
             <body suppressHydrationWarning={true} data-pc-direction="ltr" dir="ltr" >
-                <AdminProviders>
-                    <main>
-                        <NavAdmin />
-                        <HeaderAdmin />
-                        <div className="pc-container">
-                            {children}
-                        </div>
-                    </main>
+                <AdminProviders initialSession={session}>
+                    {children}
                 </AdminProviders>
-
                 <ToastContainer />
-
             </body>
         </html>
     )

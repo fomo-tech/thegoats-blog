@@ -8,10 +8,10 @@ import { useForm } from 'react-hook-form';
 import logo from '@/assets/images/logo.png'
 import Link from 'next/link';
 import { Image } from '@/components/ui/Image';
-import { login } from '@/lib/api';
 import { useRouter } from 'next/navigation';
 import { handleSubmitWithErrorHandling } from '@/utils/asyncHelpers';
 import { toast } from 'react-toastify';
+import { login } from '@/lib/db/auth';
 
 
 type PostFormValues = {
