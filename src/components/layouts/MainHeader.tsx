@@ -1,148 +1,171 @@
-import React from 'react'
+import React, { useState } from "react";
 
-const MainHeader = () => {
+const menuItems = [
+    {
+        label: "Tin tức",
+        href: "index.html",
+        submenu: [
+            { label: "Tin tổng hợp", href: "index.html" },
+            { label: "Tin vắn crypto", href: "personal.html" },
+            { label: "Tin Altcoin", href: "personal-alt.html" },
+            { label: "Pháp lý", href: "minimal.html" },
+            { label: "Defi", href: "classic.html" },
+        ],
+    },
+    { label: "Sự kiện", href: "category.html" },
+    {
+        label: "Kiến thức",
+        href: "#",
+        submenu: [
+            { label: "Phân tích kỹ thuật", href: "category.html" },
+            { label: "Phân tích cơ bản", href: "blog-single.html" },
+            { label: "Top sàn giao dịch", href: "blog-single-alt.html" },
+        ],
+    },
+    {
+        label: "Người mới",
+        href: "#",
+        submenu: [
+            { label: "Hướng dẫn", href: "category.html" },
+            { label: "Thuật ngữ crypto", href: "blog-single.html" },
+            { label: "Top sàn giao dịch", href: "blog-single-alt.html" },
+        ],
+    },
+    { label: "Liên hệ", href: "contact.html" },
+];
+
+const socialIcons = [
+    "facebook-f",
+    "twitter",
+    "instagram",
+    "pinterest",
+    "medium",
+    "youtube",
+];
+
+export default function MainHeader() {
+    const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+    const [openSubmenus, setOpenSubmenus] = useState({});
+
+    const toggleMobileMenu = () => setMobileMenuOpen(!mobileMenuOpen);
+
+    const toggleSubmenu = (index) =>
+        setOpenSubmenus((prev) => ({
+            ...prev,
+            [index]: !prev[index],
+        }));
+
+    const renderMenu = (isMobile = false) => (
+        <ul className={isMobile ? "vertical-menu" : "navbar-nav mr-auto"}>
+            {menuItems.map((item, i) => (
+                <li
+                    key={item.label}
+                    className={`nav-item ${item.submenu ? "dropdown" : ""} ${isMobile && openSubmenus[i] ? "active" : ""
+                        }`}
+                >
+                    <a
+                        className={item.submenu ? "nav-link dropdown-toggle" : "nav-link"}
+                        href={item.href}
+                        onClick={(e) => {
+                            if (isMobile && item.submenu) {
+                                e.preventDefault();
+                                toggleSubmenu(i);
+                            }
+                        }}
+                    >
+                        {item.label}
+                    </a>
+                    {item.submenu && (
+                        <>
+
+                            <ul
+                                className={isMobile ? "submenu" : "dropdown-menu"}
+                                style={
+                                    isMobile
+                                        ? { display: openSubmenus[i] ? "block" : "none" }
+                                        : {}
+                                }
+                            >
+                                {item.submenu.map((sub) => (
+                                    <li key={sub.label}>
+                                        <a
+                                            className={isMobile ? "" : "dropdown-item"}
+                                            href={sub.href}
+                                        >
+                                            {sub.label}
+                                        </a>
+                                    </li>
+                                ))}
+                            </ul>
+                        </>
+                    )}
+                </li>
+            ))}
+        </ul>
+    );
+
     return (
         <header className="header-default">
             <nav className="navbar navbar-expand-lg">
-                <div className="container-xl">
-                    {/* site logo */}
+                <div className="container">
+                    {/* Logo */}
                     <a className="navbar-brand" href="index.html">
                         logo
                     </a>
-                    <div className="bs-collapse navbar-collapse">
-                        {/* menus */}
-                        <ul className="navbar-nav mr-auto">
-                            <li className="nav-item dropdown active">
-                                <a className="nav-link dropdown-toggle" href="index.html">
-                                    Home
-                                </a>
-                                <ul className="dropdown-menu">
-                                    <li>
-                                        <a className="dropdown-item" href="index.html">
-                                            Magazine
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a className="dropdown-item" href="personal.html">
-                                            Personal
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a className="dropdown-item" href="personal-alt.html">
-                                            Personal Alt
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a className="dropdown-item" href="minimal.html">
-                                            Minimal
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a className="dropdown-item" href="classic.html">
-                                            Classic
-                                        </a>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li className="nav-item">
-                                <a className="nav-link" href="category.html">
-                                    Lifestyle
-                                </a>
-                            </li>
-                            <li className="nav-item">
-                                <a className="nav-link" href="category.html">
-                                    Inspiration
-                                </a>
-                            </li>
-                            <li className="nav-item dropdown">
-                                <a className="nav-link dropdown-toggle" href="index.html#">
-                                    Pages
-                                </a>
-                                <ul className="dropdown-menu">
-                                    <li>
-                                        <a className="dropdown-item" href="category.html">
-                                            Category
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a className="dropdown-item" href="blog-single.html">
-                                            Blog Single
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a className="dropdown-item" href="blog-single-alt.html">
-                                            Blog Single Alt
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a className="dropdown-item" href="about.html">
-                                            About
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a className="dropdown-item" href="contact.html">
-                                            Contact
-                                        </a>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li className="nav-item">
-                                <a className="nav-link" href="contact.html">
-                                    Contact
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                    {/* header right section */}
+
+                    <div className="bs-collapse navbar-collapse">{renderMenu(false)}</div>
+
+                    {/* Header right */}
                     <div className="header-right">
-                        {/* social icons */}
                         <ul className="social-icons list-unstyled list-inline mb-0">
-                            <li className="list-inline-item">
-                                <a href="index.html#">
-                                    <i className="fab fa-facebook-f" />
-                                </a>
-                            </li>
-                            <li className="list-inline-item">
-                                <a href="index.html#">
-                                    <i className="fab fa-twitter" />
-                                </a>
-                            </li>
-                            <li className="list-inline-item">
-                                <a href="index.html#">
-                                    <i className="fab fa-instagram" />
-                                </a>
-                            </li>
-                            <li className="list-inline-item">
-                                <a href="index.html#">
-                                    <i className="fab fa-pinterest" />
-                                </a>
-                            </li>
-                            <li className="list-inline-item">
-                                <a href="index.html#">
-                                    <i className="fab fa-medium" />
-                                </a>
-                            </li>
-                            <li className="list-inline-item">
-                                <a href="index.html#">
-                                    <i className="fab fa-youtube" />
-                                </a>
-                            </li>
+                            {socialIcons.map((icon) => (
+                                <li className="list-inline-item" key={icon}>
+                                    <a href="#">
+                                        <i className={`fab fa-${icon}`} />
+                                    </a>
+                                </li>
+                            ))}
                         </ul>
-                        {/* header buttons */}
                         <div className="header-buttons">
                             <button className="search icon-button">
                                 <i className="icon-magnifier" />
                             </button>
-                            <button className="burger-menu icon-button">
+                            <button
+                                className="burger-menu icon-button d-lg-none"
+                                onClick={toggleMobileMenu}
+                            >
                                 <span className="burger-icon" />
                             </button>
                         </div>
                     </div>
                 </div>
             </nav>
+
+            {/* Mobile menu */}
+            <div
+                className={`canvas-menu d-flex align-items-end flex-column ${mobileMenuOpen ? "open" : ""
+                    }`}
+            >
+                <button
+                    type="button"
+                    className="btn-close"
+                    aria-label="Close"
+                    onClick={toggleMobileMenu}
+                />
+                <div className="logo">
+                    <img src="images/logo.svg" alt="Katen" />
+                </div>
+                <nav>{renderMenu(true)}</nav>
+                <ul className="social-icons list-unstyled list-inline mb-0 mt-auto w-100">
+                    {socialIcons.map((icon) => (
+                        <li className="list-inline-item" key={icon}>
+                            <a href="#">
+                                <i className={`fab fa-${icon}`} />
+                            </a>
+                        </li>
+                    ))}
+                </ul>
+            </div>
         </header>
-
-    )
+    );
 }
-
-export default MainHeader

@@ -1,6 +1,8 @@
+import { useGlobalStore } from '@/store/useGlobalStore'
 import React from 'react'
 
 const HeaderAdmin = () => {
+    const { handleToggleNav } = useGlobalStore()
     return (
         <header className="pc-header">
             <div className="header-wrapper flex max-sm:px-[15px] px-[25px] grow">
@@ -9,10 +11,11 @@ const HeaderAdmin = () => {
                     <ul className="inline-flex *:min-h-header-height *:inline-flex *:items-center">
                         {/* ======= Menu collapse Icon ===== */}
                         <li className="pc-h-item pc-sidebar-collapse max-lg:hidden lg:inline-flex">
-                            <a
-                                href="#"
+                            <div
+
                                 className="pc-head-link ltr:!ml-0 rtl:!mr-0"
                                 id="sidebar-hide"
+
                             >
                                 <svg
                                     xmlns="http://www.w3.org/2000/svg"
@@ -30,11 +33,12 @@ const HeaderAdmin = () => {
                                     <line x1={3} y1={6} x2={21} y2={6} />
                                     <line x1={3} y1={18} x2={21} y2={18} />
                                 </svg>
-                            </a>
+                            </div>
                         </li>
                         <li className="pc-h-item pc-sidebar-popup lg:hidden">
                             <a
                                 href="#"
+                                onClick={() => handleToggleNav()}
                                 className="pc-head-link ltr:!ml-0 rtl:!mr-0"
                                 id="mobile-collapse"
                             >
@@ -331,10 +335,10 @@ const HeaderAdmin = () => {
                                                                         </span>
                                                                         <h5 className="text-body mb-2">UI/UX Design</h5>
                                                                         <p className="mb-0">
-                                                                            Lorem Ipsum has been the industry's standard
+                                                                            {`Lorem Ipsum has been the industry's standard
                                                                             dummy text ever since the 1500s, when an
                                                                             unknown printer took a galley of type and
-                                                                            scrambled it to make a type
+                                                                            scrambled it to make a type`}
                                                                         </p>
                                                                     </div>
                                                                 </div>
@@ -356,8 +360,8 @@ const HeaderAdmin = () => {
                                                                         </span>
                                                                         <h5 className="text-body mb-2">Message</h5>
                                                                         <p className="mb-0">
-                                                                            Lorem Ipsum has been the industry's standard
-                                                                            dummy text ever since the 1500.
+                                                                            {`Lorem Ipsum has been the industry's standard
+                                                                            dummy text ever since the 1500.`}
                                                                         </p>
                                                                     </div>
                                                                 </div>
@@ -380,10 +384,10 @@ const HeaderAdmin = () => {
                                                                         </span>
                                                                         <h5 className="text-body mb-2">Forms</h5>
                                                                         <p className="mb-0">
-                                                                            Lorem Ipsum has been the industry's standard
+                                                                            {`Lorem Ipsum has been the industry's standard
                                                                             dummy text ever since the 1500s, when an
                                                                             unknown printer took a galley of type and
-                                                                            scrambled it to make a type
+                                                                            scrambled it to make a type`}
                                                                         </p>
                                                                     </div>
                                                                 </div>
@@ -436,10 +440,10 @@ const HeaderAdmin = () => {
                                                                         </span>
                                                                         <h5 className="text-body mb-2">Security</h5>
                                                                         <p className="mb-0">
-                                                                            Lorem Ipsum has been the industry's standard
+                                                                            {`Lorem Ipsum has been the industry's standard
                                                                             dummy text ever since the 1500s, when an
                                                                             unknown printer took a galley of type and
-                                                                            scrambled it to make a type
+                                                                            scrambled it to make a type`}
                                                                         </p>
                                                                     </div>
                                                                 </div>

@@ -6,7 +6,8 @@ import { cookies } from 'next/headers'
 
 
 export default async function AdminLayout({ children }: { children: React.ReactNode }) {
-    const supabase = createServerComponentClient({ cookies })
+    const cookieStore = cookies()
+    const supabase = createServerComponentClient({ cookies: () => cookieStore })
     const {
         data: { session },
     } = await supabase.auth.getSession()

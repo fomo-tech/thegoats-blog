@@ -4,6 +4,7 @@ import { SessionContextProvider } from '@supabase/auth-helpers-react'
 import { useState } from 'react'
 import { createPagesBrowserClient, Session } from '@supabase/auth-helpers-nextjs'
 import AdminLayoutShell from '@/components/layouts/admin/AdminLayoutShell'
+import { NotificationProvider } from '@/components/ui/NotificationProvider'
 
 interface AdminProvidersProps {
     children: React.ReactNode;
@@ -18,7 +19,11 @@ export function AdminProviders({ children, initialSession }: AdminProvidersProps
             supabaseClient={supabase}
             initialSession={initialSession}
         >
-            <AdminLayoutShell>{children}</AdminLayoutShell>
+            <AdminLayoutShell>
+                <NotificationProvider>
+                    {children}
+                </NotificationProvider>
+            </AdminLayoutShell>
         </SessionContextProvider>
     )
 }

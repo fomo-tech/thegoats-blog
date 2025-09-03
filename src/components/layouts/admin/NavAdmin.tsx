@@ -3,16 +3,23 @@
 import { adminMenu } from '@/routes/admin'
 import React from 'react'
 import MenuItem from './MenuItem'
+import { useGlobalStore } from '@/store/useGlobalStore'
+import clsx from 'clsx'
+import { filterMenuByRole } from '@/routes/filterMenu'
 import { useSession } from '@supabase/auth-helpers-react'
 
+const userRole: 'admin' | 'writer' = 'admin'
 
 const NavAdmin = () => {
-    const session = useSession()
-    console.log('====================================');
-    console.log(session);
-    console.log('====================================');
+    const { isToggleNav, handleToggleNav } = useGlobalStore()
+
+
+    const visibleMenu = filterMenuByRole(adminMenu, userRole)
+
     return (
-        <nav className="pc-sidebar pc-trigger">
+        <nav className={clsx("pc-sidebar pc-trigger", {
+            "mob-sidebar-active": isToggleNav
+        })}>
             <div className="navbar-wrapper" style={{ display: "block" }}>
                 <div className="m-header flex items-center py-4 px-6 h-header-height">
                     <a
@@ -54,7 +61,7 @@ const NavAdmin = () => {
                                         style={{ padding: "10.625px 0px" }}
                                     >
                                         <ul className="pc-navbar" style={{ display: "block" }}>
-                                            {adminMenu.map((group, idx) => (
+                                            {visibleMenu.map((group, idx) => (
                                                 <React.Fragment key={group.key || idx}>
                                                     <li className="pc-item pc-caption">
                                                         <label>{group.label}</label>
@@ -95,6 +102,9 @@ const NavAdmin = () => {
                     </div>
                 </div>
             </div>
+            {
+                isToggleNav && <div className="pc-menu-overlay" onClick={handleToggleNav}></div>
+            }
         </nav>
     )
 }

@@ -6,6 +6,7 @@ Support: https://codedthemes.support-hub.io/
 File: style.css
 =========================================================================
 =================================================================================== */
+
 @import url("plugins/simplebar.min.css");
 /*! tailwindcss v3.4.10 | MIT License | https://tailwindcss.com */
 /*
@@ -175,14 +176,7 @@ select {
 1. Correct the inability to style clickable types in iOS and Safari.
 2. Remove default button styles.
 */
-button,
-input:where([type="button"]),
-input:where([type="reset"]),
-input:where([type="submit"]) {
-    -webkit-appearance: button; /* 1 */
-    background-color: transparent; /* 2 */
-    background-image: none; /* 2 */
-}
+/*  */
 /*
 Use the modern Firefox focus style for all focusable elements.
 */
@@ -976,6 +970,18 @@ strong {
         var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity)
         var(--tw-backdrop-saturate) var(--tw-backdrop-sepia);
 }
+.notification-overlay {
+    position: fixed;
+    inset: 0px;
+    background-color: rgba(0, 0, 0, 0.15);
+    --tw-backdrop-blur: blur(3px);
+    -webkit-backdrop-filter: var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast)
+        var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity)
+        var(--tw-backdrop-saturate) var(--tw-backdrop-sepia);
+    backdrop-filter: var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast)
+        var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity)
+        var(--tw-backdrop-saturate) var(--tw-backdrop-sepia);
+}
 .pc-navbar .pc-caption {
     display: block;
     padding-left: 23px;
@@ -1175,7 +1181,7 @@ strong {
     opacity: 1;
 }
 .pc-navbar > .pc-item .pc-submenu .pc-link:where([dir="ltr"], [dir="ltr"] *) {
-    padding-left: 60px;
+    padding-left: 10px;
 }
 .pc-navbar > .pc-item .pc-submenu .pc-link:where([dir="ltr"], [dir="ltr"] *)::after {
     content: var(--tw-content);
@@ -2568,9 +2574,17 @@ text:is([data-pc-theme="dark"] *),
     margin-right: 1.35rem;
 }
 .breadcrumb .breadcrumb-item:not(:last-child):where([dir="ltr"], [dir="ltr"] *)::before {
+    content: "";
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke-width='1.5' stroke='currentColor'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' d='M8.25 4.5l7.5 7.5-7.5 7.5'/%3E%3C/svg%3E");
+    background-size: contain;
+    background-repeat: no-repeat;
+    position: absolute;
     right: -20px;
-    --tw-content: "\ea61";
-    content: var(--tw-content);
+    top: 50%;
+    transform: translateY(-50%);
 }
 .breadcrumb .breadcrumb-item:not(:last-child):where([dir="rtl"], [dir="rtl"] *) {
     margin-left: 1.35rem;
@@ -4641,6 +4655,16 @@ table.dataTable tfoot tr > .dtfc-fixed-end:is([data-pc-theme="dark"] *) {
 .animate-\[btn-floating_2s_infinite\] {
     animation: btn-floating 2s infinite;
 }
+
+.animate-spin_08s {
+    animation: spin 0.8s linear infinite;
+}
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
 @keyframes floating {
     0% {
         transform: rotate(0deg) translate(-10px) rotate(0deg);

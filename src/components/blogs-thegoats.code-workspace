@@ -1,0 +1,14 @@
+{
+	"folders": [
+		{
+			"path": "../.."
+		},
+		{
+			"path": "../../../../template/themeger.shop"
+		}
+	],
+	"settings": {
+		"screencastMode.fontSize": 60,
+		"liveServer.settings.multiRootWorkspaceName": "themeger.shop"
+	}
+}
