@@ -1,3 +1,5 @@
+'use client'
+
 import CategoriesPost from '@/components/post/CategoriesPost'
 import PopularPost from '@/components/post/PopularPost'
 import TagsPost from '@/components/post/TagsPost'
@@ -15,10 +17,10 @@ const SidebarWidget = () => {
                     <img src="https://placehold.co/600x400" alt="Advertisement" />
                 </a>
             </div>
-
-            <PopularPost />
+            {/* <PopularPost />
             <CategoriesPost />
-            <TagsPost />
+            <TagsPost /> */}
+
         </>
     )
 }

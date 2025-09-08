@@ -1,4 +1,4 @@
-/* eslint-disable @next/next/no-img-element */
+
 import { getHeroPosts } from '@/lib/db/post'
 import Link from 'next/link'
 import React from 'react'

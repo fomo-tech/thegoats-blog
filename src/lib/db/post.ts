@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
+
 import { supabase } from '../supabaseClient'
 
 export type Post = {
@@ -77,6 +77,7 @@ export async function getPostLists() {
 
 
 
+
 export async function getHeroPosts() {
   const { data, error } = await supabase
     .from('posts')
@@ -119,7 +120,12 @@ export async function getPostsPaginatedWithFilters({
     .from('posts')
     .select(`
       *,
-      profile(email,display_name),
+    author:profile!posts_author_id_fkey (
+      id,
+      email,
+      display_name,
+      picture_url
+    ),
       categories(name),
       post_tags(
         tag:tags(id, name)
@@ -172,6 +178,36 @@ export async function getPostsPaginatedWithFilters({
   }
 }
 
+export async function getPostsBySlugCategoryPaginate(
+  { page =1,
+  pageSize =10,
+  slug}:
+ { page?: number,
+  pageSize?: number,
+  slug: string}
+): Promise<{ posts: Post[]; total: number }> {
+  const from = (page - 1) * pageSize
+  const to = from + pageSize - 1
+
+  const { data: posts, count, error } = await supabase
+    .from('posts')
+    .select(
+      `
+      *,
+      category:categories!inner(*)
+      `,
+      { count: 'exact' }
+    )
+    .eq('categories.slug', slug) // filter theo slug của category
+    .range(from, to)
+    .order('created_at', { ascending: false })
+
+  if (error) {
+    throw new Error('Lỗi khi lấy danh sách bài viết: ' + error.message)
+  }
+
+  return { posts: posts || [], total: count || 0 }
+}
 
 
 
@@ -215,8 +251,20 @@ export async function getPostBySlug(slug: string): Promise<any | null> {
   if (error) {
     throw new Error('Lỗi khi lấy bài viết theo slug: ' + error.message);
   }
+ if (!data) return null;
+ const { error: updateError } = await supabase
+    .from('posts')
+    .update({ views: (data.views ?? 0) + 1 })
+    .eq('id', data.id);
 
-  return data;
+  if (updateError) {
+    console.error('Lỗi khi tăng view:', updateError.message);
+  }
+
+  return {
+    ...data,
+    views: (data.views ?? 0) + 1, // trả về giá trị đã tăng
+  };
 }
 
 
@@ -324,9 +372,6 @@ export async function createPost(post: {
 
   return insertedPost
 }
-
-
-
 
 // ✅ Cập nhật bài viết
 export async function updatePost(

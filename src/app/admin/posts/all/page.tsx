@@ -33,6 +33,8 @@ const PostLists = () => {
             (err) => toast.error(err.message),
             setLoading
         ) as any
+        console.log(posts);
+
         setPosts(posts)
         setTotal(total)
     }
@@ -92,6 +94,19 @@ const PostLists = () => {
             title: 'Tiêu đề',
             dataIndex: 'title',
             key: 'title',
+            render: (text: string) => (
+                <span
+                    style={{
+                        display: "inline-block",
+                        maxWidth: 200,         // set giới hạn rộng tối đa
+                        whiteSpace: "nowrap",  // giữ text 1 dòng
+                        overflow: "hidden",    // ẩn phần thừa
+                        textOverflow: "ellipsis", // hiện "..."
+                    }}
+                >
+                    {text}
+                </span>
+            ),
         },
         {
             title: 'Tác giả',

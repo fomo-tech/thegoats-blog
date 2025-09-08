@@ -20,7 +20,7 @@ const CategoriesPost = async () => {
                     <ul className="list">
                         {categories.map((category) => (
                             <li key={category.id}>
-                                <a href={`/categories/${category.id}`}>
+                                <a href={`/category/${category?.slug}`}>
                                     {category.name}
                                 </a>
 

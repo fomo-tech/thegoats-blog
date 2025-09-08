@@ -11,6 +11,19 @@ export async function createCategory(name: string, slug: string) {
   return data
 }
 
+export async function getCategoryBySlug(slug: string) {
+  
+  
+  const { data, error } = await supabase
+    .from('categories')
+    .select('*')
+    .eq('slug', slug)
+    .single()
+
+  if (error) throw error
+  return data
+}
+
 export async function getAllCategories() {
   const { data, error } = await supabase
     .from('categories')
