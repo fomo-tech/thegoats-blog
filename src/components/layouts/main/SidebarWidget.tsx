@@ -17,9 +17,9 @@ const SidebarWidget = () => {
                     <img src="https://placehold.co/600x400" alt="Advertisement" />
                 </a>
             </div>
-            {/* <PopularPost />
+            <PopularPost />
             <CategoriesPost />
-            <TagsPost /> */}
+            <TagsPost />
 
         </>
     )

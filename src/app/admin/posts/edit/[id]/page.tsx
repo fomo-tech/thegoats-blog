@@ -96,6 +96,7 @@ const EditPost = () => {
                         title: post.title,
                         excerpt: post.excerpt || '',
                         content: post.content,
+                        isPublished: post.is_published ? 'published' : 'draft',
                         coverImage: post.cover_image,
                         categoryId: post.category_id,
                         tags: post.tags || [],
@@ -202,31 +203,18 @@ const EditPost = () => {
                         maxSelectable={5}
                     />
                 </div>
-
-                {/* Trạng thái */}
-                <div>
-                    <label className="block text-md font-medium text-gray-800 mb-2">Trạng thái</label>
-                    <div className="flex gap-6">
-                        <label className="flex items-center gap-2 text-md">
-                            <input
-                                type="radio"
-                                value="draft"
-                                {...register('isPublished', { required: true })}
-                                className="accent-blue-600"
-                            />
-                            <span>Bản nháp</span>
-                        </label>
-                        <label className="flex items-center gap-2 text-md">
-                            <input
-                                type="radio"
-                                value="published"
-                                {...register('isPublished', { required: true })}
-                                className="accent-green-600"
-                            />
-                            <span>Xuất bản</span>
-                        </label>
-                    </div>
+                {/* Nổi bật / Trending */}
+                <div className="flex items-center gap-3 mb-3">
+                    <label className="flex items-center gap-2 text-md">
+                        <input type="checkbox" {...register('is_featured')} className="accent-blue-600" />
+                        <span>Nổi bật</span>
+                    </label>
+                    <label className="flex items-center gap-2 text-md">
+                        <input type="checkbox" {...register('is_trending')} className="accent-red-600" />
+                        <span>Trending</span>
+                    </label>
                 </div>
+
                 {/* Tóm tắt */}
                 <div className='mb-3'>
                     <label className="block text-base font-medium text-gray-800 mb-2">Tóm tắt</label>
@@ -260,18 +248,31 @@ const EditPost = () => {
                     />
                 </div>
 
-                {/* Nổi bật / Trending */}
-                <div className="flex items-center gap-3">
-                    <label className="flex items-center gap-2 text-md">
-                        <input type="checkbox" {...register('is_featured')} className="accent-blue-600" />
-                        <span>Nổi bật</span>
-                    </label>
-                    <label className="flex items-center gap-2 text-md">
-                        <input type="checkbox" {...register('is_trending')} className="accent-red-600" />
-                        <span>Trending</span>
-                    </label>
-                </div>
 
+                {/* Trạng thái */}
+                <div>
+                    <label className="block text-md font-medium text-gray-800 mb-2">Trạng thái</label>
+                    <div className="flex gap-6">
+                        <label className="flex items-center gap-2 text-md">
+                            <input
+                                type="radio"
+                                value="draft"
+                                {...register('isPublished', { required: true })}
+                                className="accent-blue-600"
+                            />
+                            <span>Bản nháp</span>
+                        </label>
+                        <label className="flex items-center gap-2 text-md">
+                            <input
+                                type="radio"
+                                value="published"
+                                {...register('isPublished', { required: true })}
+                                className="accent-green-600"
+                            />
+                            <span>Xuất bản</span>
+                        </label>
+                    </div>
+                </div>
                 {/* Nút lưu */}
                 <div className="text-right pt-4">
                     <button

@@ -6,7 +6,7 @@ import PostTabs from '../PostTabs'
 export default async function HeroSection() {
     const { featuredPost, popularPosts, recentPosts } = await getHeroPosts()
 
-    if (!featuredPost) return null
+    if (!featuredPost || !popularPosts || !recentPosts) return null
 
     return (
         <section id="hero">

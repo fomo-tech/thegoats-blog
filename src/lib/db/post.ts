@@ -15,7 +15,7 @@ export type Post = {
   updated_at: string
   category_id: string
   tags: string[] // danh sách tag ID
-
+  is_published: boolean
   // ➕ Các trường mới
   is_featured?: boolean
   is_trending?: boolean
@@ -30,10 +30,12 @@ export async function getPostLists() {
   const { data: trendingPosts, error: trendingError } = await supabase
     .from('posts')
     .select(`
-      id, title, slug, cover_image, views,
-      author:author_id ( display_name ),
-      category:category_id ( name ),
-      published_at
+      *,
+      categories(name),
+      profile(display_name),
+      post_tags(
+        tag:tags(id,name)
+      )
     `)
     .eq('is_trending', true)
     .eq('is_published', true)
@@ -83,7 +85,6 @@ export async function getHeroPosts() {
     .from('posts')
     .select(`
       id, title, slug, is_featured,is_published, is_trending,cover_image,
-      author:author_id ( display_name ),
       category:category_id ( name ),
       published_at
     `)
@@ -117,22 +118,17 @@ export async function getPostsPaginatedWithFilters({
 
   // Step 1: Chuẩn bị query cơ bản
   let query = supabase
-    .from('posts')
-    .select(`
-      *,
-    author:profile!posts_author_id_fkey (
-      id,
-      email,
-      display_name,
-      picture_url
-    ),
-      categories(name),
-      post_tags(
-        tag:tags(id, name)
-      )
-    `, { count: 'exact' })
-    .range(from, to)
-    .order('created_at', { ascending: false })
+  .from('posts')
+  .select(`
+    *,
+    categories(name),
+    profile(display_name),
+    post_tags(
+      tag:tags(id, name)
+    )
+  `, { count: 'exact' })
+  .range(from, to)
+  .order('created_at', { ascending: false })
 
   // Step 2: Thêm filter title nếu có
   if (search.trim()) {

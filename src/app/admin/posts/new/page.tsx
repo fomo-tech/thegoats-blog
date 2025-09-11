@@ -165,30 +165,7 @@ const NewPost = () => {
                     />
                 </div>
 
-                {/* Trạng thái */}
-                <div className="mb-6">
-                    <label className="block font-medium text-gray-800 mb-2">Trạng thái</label>
-                    <div className="flex gap-6">
-                        <label className="flex items-center gap-2">
-                            <input
-                                type="radio"
-                                value="draft"
-                                {...register('isPublished')}
-                                className="accent-blue-600"
-                            />
-                            <span>Bản nháp</span>
-                        </label>
-                        <label className="flex items-center gap-2">
-                            <input
-                                type="radio"
-                                value="published"
-                                {...register('isPublished')}
-                                className="accent-green-600"
-                            />
-                            <span>Xuất bản</span>
-                        </label>
-                    </div>
-                </div>
+
 
                 {/* Nổi bật + Xu hướng */}
                 <div className="mb-6 flex items-center gap-6">
@@ -223,7 +200,30 @@ const NewPost = () => {
                         placeholder="Mô tả ngắn cho SEO..."
                     />
                 </div>
-
+                {/* Trạng thái */}
+                <div className="mb-6">
+                    <label className="block font-medium text-gray-800 mb-2">Trạng thái</label>
+                    <div className="flex gap-6">
+                        <label className="flex items-center gap-2">
+                            <input
+                                type="radio"
+                                value="draft"
+                                {...register('isPublished')}
+                                className="accent-blue-600"
+                            />
+                            <span>Bản nháp</span>
+                        </label>
+                        <label className="flex items-center gap-2">
+                            <input
+                                type="radio"
+                                value="published"
+                                {...register('isPublished')}
+                                className="accent-green-600"
+                            />
+                            <span>Xuất bản</span>
+                        </label>
+                    </div>
+                </div>
                 {/* Nút lưu */}
                 <div className="text-right pt-4">
                     <button
