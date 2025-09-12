@@ -1,37 +1,38 @@
+import Link from "next/link";
 import React, { useState } from "react";
+import SeachPopup from "../SeachPopup";
 
 const menuItems = [
     {
         label: "Tin tức",
-        href: "index.html",
+        href: "#",
         submenu: [
-            { label: "Tin tổng hợp", href: "index.html" },
-            { label: "Tin vắn crypto", href: "personal.html" },
-            { label: "Tin Altcoin", href: "personal-alt.html" },
-            { label: "Pháp lý", href: "minimal.html" },
-            { label: "Defi", href: "classic.html" },
+            { label: "Tin tổng hợp", href: "/category/tin-tong-hop" },
+            { label: "Tin vắn crypto", href: "/category/tin-van" },
+            { label: "Tin Altcoin", href: "/category/tin-altcoin" },
+            { label: "Pháp lý", href: "/category/phaply" },
+            { label: "Defi", href: "/category/defi" },
         ],
     },
-    { label: "Sự kiện", href: "category.html" },
+    { label: "Sự kiện", href: "/category/su-kien" },
     {
         label: "Kiến thức",
         href: "#",
         submenu: [
-            { label: "Phân tích kỹ thuật", href: "category.html" },
-            { label: "Phân tích cơ bản", href: "blog-single.html" },
-            { label: "Top sàn giao dịch", href: "blog-single-alt.html" },
+            { label: "Phân tích kỹ thuật", href: "/category/phan-tich-ky-thuat" },
+            { label: "Phân tích cơ bản", href: "/category/phan-tich-co-ban" },
         ],
     },
     {
         label: "Người mới",
         href: "#",
         submenu: [
-            { label: "Hướng dẫn", href: "category.html" },
-            { label: "Thuật ngữ crypto", href: "blog-single.html" },
-            { label: "Top sàn giao dịch", href: "blog-single-alt.html" },
+            { label: "Hướng dẫn", href: "/category/huong-dan" },
+            { label: "Thuật ngữ crypto", href: "/category-thuat-ngu-crypto" },
+            { label: "Top sàn giao dịch", href: "/category/top-san-giao-dich" },
         ],
     },
-    { label: "Liên hệ", href: "contact.html" },
+    { label: "Liên hệ", href: "/contact" },
 ];
 
 const socialIcons = [
@@ -46,8 +47,10 @@ const socialIcons = [
 export default function MainHeader() {
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
     const [openSubmenus, setOpenSubmenus] = useState({});
+    const [searchOpen, setSearchOpen] = useState(false);
 
     const toggleMobileMenu = () => setMobileMenuOpen(!mobileMenuOpen);
+
 
     const toggleSubmenu = (index) =>
         setOpenSubmenus((prev) => ({
@@ -106,12 +109,14 @@ export default function MainHeader() {
 
     return (
         <header className="header-default">
+            <SeachPopup isOpen={searchOpen} onClose={() => setSearchOpen(false)} />
+            {/* Navbar */}
             <nav className="navbar navbar-expand-lg">
                 <div className="container">
                     {/* Logo */}
-                    <a className="navbar-brand" href="index.html">
+                    <Link className="navbar-brand" href="/">
                         logo
-                    </a>
+                    </Link>
 
                     <div className="bs-collapse navbar-collapse">{renderMenu(false)}</div>
 
@@ -127,7 +132,7 @@ export default function MainHeader() {
                             ))}
                         </ul>
                         <div className="header-buttons">
-                            <button className="search icon-button">
+                            <button className="search icon-button" onClick={() => setSearchOpen(true)}>
                                 <i className="icon-magnifier" />
                             </button>
                             <button

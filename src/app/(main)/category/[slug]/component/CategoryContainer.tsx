@@ -1,10 +1,10 @@
 'use client'
 
-
 import Pagination from '@/components/ui/Pagination'
 import { getPostsBySlugCategoryPaginate } from '@/lib/db/post';
 import { handleSubmitWithErrorHandling } from '@/utils/asyncHelpers';
-import React, { useEffect } from 'react'
+import Link from 'next/link';
+import React, { useEffect, useState } from 'react'
 import { toast } from 'react-toastify';
 
 interface CategoryContainerProps {
@@ -12,855 +12,95 @@ interface CategoryContainerProps {
 }
 
 const CategoryContainer = ({ categorySlug }: CategoryContainerProps) => {
-    console.log(1);
+    const [posts, setPosts] = useState<any[]>([]);
+    const [total, setTotal] = useState(0);
+    const [page, setPage] = useState(1);
 
-
-    const getPostCategoryBySlug = async (slug: string) => {
-        const { posts, total } = await handleSubmitWithErrorHandling(
-            () => getPostsBySlugCategoryPaginate({
-                slug: categorySlug || ''
-            }),
+    const getPostCategoryBySlug = async (page: number) => {
+        const res = await handleSubmitWithErrorHandling(
+            () =>
+                getPostsBySlugCategoryPaginate({
+                    slug: categorySlug || '',
+                    page,
+                }),
             (err) => toast.error(err.message),
-        ) as any
-        console.log(posts, total);
+        ) as any;
 
-    }
+        if (res) {
+            setPosts(res.posts || []);
+            setTotal(res.total || 0);
+        }
+    };
 
-
+    useEffect(() => {
+        if (categorySlug) {
+            getPostCategoryBySlug(page);
+        }
+    }, [categorySlug, page]);
 
     return (
         <>
             <div className="row gy-4">
-                <div className="col-sm-6">
-                    {/* post */}
-                    <div className="post post-grid rounded bordered">
-                        <div className="thumb top-rounded">
-                            <a href="category.html" className="category-badge position-absolute">
-                                Lifestyle
-                            </a>
-                            <span className="post-format">
-                                <i className="icon-picture" />
-                            </span>
-                            <a href="blog-single.html">
-                                <div className="inner">
-                                    <img src="images/posts/post-md-1.jpg" alt="post-title" />
-                                </div>
-                            </a>
-                        </div>
-                        <div className="details">
-                            <ul className="meta list-inline mb-0">
-                                <li className="list-inline-item">
-                                    <a href="category.html#">
-                                        <img
-                                            src="images/other/author-sm.png"
-                                            className="author"
-                                            alt="author"
-                                        />
-                                        Katen Doe
-                                    </a>
-                                </li>
-                                <li className="list-inline-item">29 March 2021</li>
-                            </ul>
-                            <h5 className="post-title mb-3 mt-3">
-                                <a href="blog-single.html">
-                                    How To Become Better With Building In 1 Month
-                                </a>
-                            </h5>
-                            <p className="excerpt mb-0">
-                                I am so happy, my dear friend, so absorbed in the exquisite sense of
-                                mere tranquil existence.
-                            </p>
-                        </div>
-                        <div className="post-bottom clearfix d-flex align-items-center">
-                            <div className="social-share me-auto">
-                                <button className="toggle-button icon-share" />
-                                <ul className="icons list-unstyled list-inline mb-0">
-                                    <li className="list-inline-item">
-                                        <a href="category.html#">
-                                            <i className="fab fa-facebook-f" />
-                                        </a>
-                                    </li>
-                                    <li className="list-inline-item">
-                                        <a href="category.html#">
-                                            <i className="fab fa-twitter" />
-                                        </a>
-                                    </li>
-                                    <li className="list-inline-item">
-                                        <a href="category.html#">
-                                            <i className="fab fa-linkedin-in" />
-                                        </a>
-                                    </li>
-                                    <li className="list-inline-item">
-                                        <a href="category.html#">
-                                            <i className="fab fa-pinterest" />
-                                        </a>
-                                    </li>
-                                    <li className="list-inline-item">
-                                        <a href="category.html#">
-                                            <i className="fab fa-telegram-plane" />
-                                        </a>
-                                    </li>
-                                    <li className="list-inline-item">
-                                        <a href="category.html#">
-                                            <i className="far fa-envelope" />
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div className="more-button float-end">
-                                <a href="blog-single.html">
-                                    <span className="icon-options" />
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div className="col-sm-6">
-                    {/* post */}
-                    <div className="post post-grid rounded bordered">
-                        <div className="thumb top-rounded">
-                            <a href="category.html" className="category-badge position-absolute">
-                                Inspiration
-                            </a>
-                            <a href="blog-single.html">
-                                <div className="inner">
-                                    <img src="images/posts/post-md-2.jpg" alt="post-title" />
-                                </div>
-                            </a>
-                        </div>
-                        <div className="details">
-                            <ul className="meta list-inline mb-0">
-                                <li className="list-inline-item">
-                                    <a href="category.html#">
-                                        <img
-                                            src="images/other/author-sm.png"
-                                            className="author"
-                                            alt="author"
-                                        />
-                                        Katen Doe
-                                    </a>
-                                </li>
-                                <li className="list-inline-item">29 March 2021</li>
-                            </ul>
-                            <h5 className="post-title mb-3 mt-3">
-                                <a href="blog-single.html">
-                                    Most Important Thing You Need To Know About Swim
-                                </a>
-                            </h5>
-                            <p className="excerpt mb-0">
-                                I am so happy, my dear friend, so absorbed in the exquisite sense of
-                                mere tranquil existence.
-                            </p>
-                        </div>
-                        <div className="post-bottom clearfix d-flex align-items-center">
-                            <div className="social-share me-auto">
-                                <button className="toggle-button icon-share" />
-                                <ul className="icons list-unstyled list-inline mb-0">
-                                    <li className="list-inline-item">
-                                        <a href="category.html#">
-                                            <i className="fab fa-facebook-f" />
-                                        </a>
-                                    </li>
-                                    <li className="list-inline-item">
-                                        <a href="category.html#">
-                                            <i className="fab fa-twitter" />
-                                        </a>
-                                    </li>
-                                    <li className="list-inline-item">
-                                        <a href="category.html#">
-                                            <i className="fab fa-linkedin-in" />
-                                        </a>
-                                    </li>
-                                    <li className="list-inline-item">
-                                        <a href="category.html#">
-                                            <i className="fab fa-pinterest" />
-                                        </a>
-                                    </li>
-                                    <li className="list-inline-item">
-                                        <a href="category.html#">
-                                            <i className="fab fa-telegram-plane" />
-                                        </a>
-                                    </li>
-                                    <li className="list-inline-item">
-                                        <a href="category.html#">
-                                            <i className="far fa-envelope" />
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div className="more-button float-end">
-                                <a href="blog-single.html">
-                                    <span className="icon-options" />
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div className="col-sm-6">
-                    {/* post */}
-                    <div className="post post-grid rounded bordered">
-                        <div className="thumb top-rounded">
-                            <a href="category.html" className="category-badge position-absolute">
-                                Fashion
-                            </a>
-                            <a href="blog-single.html">
-                                <div className="inner">
-                                    <img src="images/posts/post-md-3.jpg" alt="post-title" />
-                                </div>
-                            </a>
-                        </div>
-                        <div className="details">
-                            <ul className="meta list-inline mb-0">
-                                <li className="list-inline-item">
-                                    <a href="category.html#">
-                                        <img
-                                            src="images/other/author-sm.png"
-                                            className="author"
-                                            alt="author"
-                                        />
-                                        Katen Doe
-                                    </a>
-                                </li>
-                                <li className="list-inline-item">29 March 2021</li>
-                            </ul>
-                            <h5 className="post-title mb-3 mt-3">
-                                <a href="blog-single.html">
-                                    The Secrets To Finding Class Tools For Your Dress
-                                </a>
-                            </h5>
-                            <p className="excerpt mb-0">
-                                I am so happy, my dear friend, so absorbed in the exquisite sense of
-                                mere tranquil existence.
-                            </p>
-                        </div>
-                        <div className="post-bottom clearfix d-flex align-items-center">
-                            <div className="social-share me-auto">
-                                <button className="toggle-button icon-share" />
-                                <ul className="icons list-unstyled list-inline mb-0">
-                                    <li className="list-inline-item">
-                                        <a href="category.html#">
-                                            <i className="fab fa-facebook-f" />
-                                        </a>
-                                    </li>
-                                    <li className="list-inline-item">
-                                        <a href="category.html#">
-                                            <i className="fab fa-twitter" />
-                                        </a>
-                                    </li>
-                                    <li className="list-inline-item">
-                                        <a href="category.html#">
-                                            <i className="fab fa-linkedin-in" />
-                                        </a>
-                                    </li>
-                                    <li className="list-inline-item">
-                                        <a href="category.html#">
-                                            <i className="fab fa-pinterest" />
-                                        </a>
-                                    </li>
-                                    <li className="list-inline-item">
-                                        <a href="category.html#">
-                                            <i className="fab fa-telegram-plane" />
-                                        </a>
-                                    </li>
-                                    <li className="list-inline-item">
-                                        <a href="category.html#">
-                                            <i className="far fa-envelope" />
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div className="more-button float-end">
-                                <a href="blog-single.html">
-                                    <span className="icon-options" />
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div className="col-sm-6">
-                    {/* post */}
-                    <div className="post post-grid rounded bordered">
-                        <div className="thumb top-rounded">
-                            <a href="category.html" className="category-badge position-absolute">
-                                Lifestyle
-                            </a>
-                            <span className="post-format">
-                                <i className="icon-camrecorder" />
-                            </span>
-                            <a href="blog-single.html">
-                                <div className="inner">
-                                    <img src="images/posts/post-md-4.jpg" alt="post-title" />
-                                </div>
-                            </a>
-                        </div>
-                        <div className="details">
-                            <ul className="meta list-inline mb-0">
-                                <li className="list-inline-item">
-                                    <a href="category.html#">
-                                        <img
-                                            src="images/other/author-sm.png"
-                                            className="author"
-                                            alt="author"
-                                        />
-                                        Katen Doe
-                                    </a>
-                                </li>
-                                <li className="list-inline-item">29 March 2021</li>
-                            </ul>
-                            <h5 className="post-title mb-3 mt-3">
-                                <a href="blog-single.html">
-                                    How I Improved My Fashion Style In One Day
-                                </a>
-                            </h5>
-                            <p className="excerpt mb-0">
-                                I am so happy, my dear friend, so absorbed in the exquisite sense of
-                                mere tranquil existence.
-                            </p>
-                        </div>
-                        <div className="post-bottom clearfix d-flex align-items-center">
-                            <div className="social-share me-auto">
-                                <button className="toggle-button icon-share" />
-                                <ul className="icons list-unstyled list-inline mb-0">
-                                    <li className="list-inline-item">
-                                        <a href="category.html#">
-                                            <i className="fab fa-facebook-f" />
-                                        </a>
-                                    </li>
-                                    <li className="list-inline-item">
-                                        <a href="category.html#">
-                                            <i className="fab fa-twitter" />
-                                        </a>
-                                    </li>
-                                    <li className="list-inline-item">
-                                        <a href="category.html#">
-                                            <i className="fab fa-linkedin-in" />
-                                        </a>
-                                    </li>
-                                    <li className="list-inline-item">
-                                        <a href="category.html#">
-                                            <i className="fab fa-pinterest" />
-                                        </a>
-                                    </li>
-                                    <li className="list-inline-item">
-                                        <a href="category.html#">
-                                            <i className="fab fa-telegram-plane" />
-                                        </a>
-                                    </li>
-                                    <li className="list-inline-item">
-                                        <a href="category.html#">
-                                            <i className="far fa-envelope" />
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div className="more-button float-end">
-                                <a href="blog-single.html">
-                                    <span className="icon-options" />
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div className="col-sm-6">
-                    {/* post */}
-                    <div className="post post-grid rounded bordered">
-                        <div className="thumb top-rounded">
-                            <a href="category.html" className="category-badge position-absolute">
-                                Trending
-                            </a>
-                            <a href="blog-single.html">
-                                <div className="inner">
-                                    <img src="images/posts/post-md-5.jpg" alt="post-title" />
-                                </div>
-                            </a>
-                        </div>
-                        <div className="details">
-                            <ul className="meta list-inline mb-0">
-                                <li className="list-inline-item">
-                                    <a href="category.html#">
-                                        <img
-                                            src="images/other/author-sm.png"
-                                            className="author"
-                                            alt="author"
-                                        />
-                                        Katen Doe
-                                    </a>
-                                </li>
-                                <li className="list-inline-item">29 March 2021</li>
-                            </ul>
-                            <h5 className="post-title mb-3 mt-3">
-                                <a href="blog-single.html">
-                                    3 Easy Ways To Make Your iPhone Faster
-                                </a>
-                            </h5>
-                            <p className="excerpt mb-0">
-                                I am so happy, my dear friend, so absorbed in the exquisite sense of
-                                mere tranquil existence.
-                            </p>
-                        </div>
-                        <div className="post-bottom clearfix d-flex align-items-center">
-                            <div className="social-share me-auto">
-                                <button className="toggle-button icon-share" />
-                                <ul className="icons list-unstyled list-inline mb-0">
-                                    <li className="list-inline-item">
-                                        <a href="category.html#">
-                                            <i className="fab fa-facebook-f" />
-                                        </a>
-                                    </li>
-                                    <li className="list-inline-item">
-                                        <a href="category.html#">
-                                            <i className="fab fa-twitter" />
-                                        </a>
-                                    </li>
-                                    <li className="list-inline-item">
-                                        <a href="category.html#">
-                                            <i className="fab fa-linkedin-in" />
-                                        </a>
-                                    </li>
-                                    <li className="list-inline-item">
-                                        <a href="category.html#">
-                                            <i className="fab fa-pinterest" />
-                                        </a>
-                                    </li>
-                                    <li className="list-inline-item">
-                                        <a href="category.html#">
-                                            <i className="fab fa-telegram-plane" />
-                                        </a>
-                                    </li>
-                                    <li className="list-inline-item">
-                                        <a href="category.html#">
-                                            <i className="far fa-envelope" />
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div className="more-button float-end">
-                                <a href="blog-single.html">
-                                    <span className="icon-options" />
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div className="col-sm-6">
-                    {/* post */}
-                    <div className="post post-grid rounded bordered">
-                        <div className="thumb top-rounded">
-                            <a href="category.html" className="category-badge position-absolute">
-                                Fashion
-                            </a>
-                            <a href="blog-single.html">
-                                <div className="inner">
-                                    <img src="images/posts/post-md-6.jpg" alt="post-title" />
-                                </div>
-                            </a>
-                        </div>
-                        <div className="details">
-                            <ul className="meta list-inline mb-0">
-                                <li className="list-inline-item">
-                                    <a href="category.html#">
-                                        <img
-                                            src="images/other/author-sm.png"
-                                            className="author"
-                                            alt="author"
-                                        />
-                                        Katen Doe
-                                    </a>
-                                </li>
-                                <li className="list-inline-item">29 March 2021</li>
-                            </ul>
-                            <h5 className="post-title mb-3 mt-3">
-                                <a href="blog-single.html">
-                                    Wondering How To Make Your Hair Style Rock?
-                                </a>
-                            </h5>
-                            <p className="excerpt mb-0">
-                                I am so happy, my dear friend, so absorbed in the exquisite sense of
-                                mere tranquil existence.
-                            </p>
-                        </div>
-                        <div className="post-bottom clearfix d-flex align-items-center">
-                            <div className="social-share me-auto">
-                                <button className="toggle-button icon-share" />
-                                <ul className="icons list-unstyled list-inline mb-0">
-                                    <li className="list-inline-item">
-                                        <a href="category.html#">
-                                            <i className="fab fa-facebook-f" />
-                                        </a>
-                                    </li>
-                                    <li className="list-inline-item">
-                                        <a href="category.html#">
-                                            <i className="fab fa-twitter" />
-                                        </a>
-                                    </li>
-                                    <li className="list-inline-item">
-                                        <a href="category.html#">
-                                            <i className="fab fa-linkedin-in" />
-                                        </a>
-                                    </li>
-                                    <li className="list-inline-item">
-                                        <a href="category.html#">
-                                            <i className="fab fa-pinterest" />
-                                        </a>
-                                    </li>
-                                    <li className="list-inline-item">
-                                        <a href="category.html#">
-                                            <i className="fab fa-telegram-plane" />
-                                        </a>
-                                    </li>
-                                    <li className="list-inline-item">
-                                        <a href="category.html#">
-                                            <i className="far fa-envelope" />
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div className="more-button float-end">
-                                <a href="blog-single.html">
-                                    <span className="icon-options" />
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div className="col-sm-6">
-                    {/* post */}
-                    <div className="post post-grid rounded bordered">
-                        <div className="thumb top-rounded">
-                            <a href="category.html" className="category-badge position-absolute">
-                                How To
-                            </a>
-                            <span className="post-format">
-                                <i className="icon-picture" />
-                            </span>
-                            <a href="blog-single.html">
-                                <div className="inner">
-                                    <img src="images/posts/post-md-7.jpg" alt="post-title" />
-                                </div>
-                            </a>
-                        </div>
-                        <div className="details">
-                            <ul className="meta list-inline mb-0">
-                                <li className="list-inline-item">
-                                    <a href="category.html#">
-                                        <img
-                                            src="images/other/author-sm.png"
-                                            className="author"
-                                            alt="author"
-                                        />
-                                        Katen Doe
-                                    </a>
-                                </li>
-                                <li className="list-inline-item">29 March 2021</li>
-                            </ul>
-                            <h5 className="post-title mb-3 mt-3">
-                                <a href="blog-single.html">
-                                    How To Make More Construction By Doing Less
-                                </a>
-                            </h5>
-                            <p className="excerpt mb-0">
-                                I am so happy, my dear friend, so absorbed in the exquisite sense of
-                                mere tranquil existence.
-                            </p>
-                        </div>
-                        <div className="post-bottom clearfix d-flex align-items-center">
-                            <div className="social-share me-auto">
-                                <button className="toggle-button icon-share" />
-                                <ul className="icons list-unstyled list-inline mb-0">
-                                    <li className="list-inline-item">
-                                        <a href="category.html#">
-                                            <i className="fab fa-facebook-f" />
-                                        </a>
-                                    </li>
-                                    <li className="list-inline-item">
-                                        <a href="category.html#">
-                                            <i className="fab fa-twitter" />
-                                        </a>
-                                    </li>
-                                    <li className="list-inline-item">
-                                        <a href="category.html#">
-                                            <i className="fab fa-linkedin-in" />
-                                        </a>
-                                    </li>
-                                    <li className="list-inline-item">
-                                        <a href="category.html#">
-                                            <i className="fab fa-pinterest" />
-                                        </a>
-                                    </li>
-                                    <li className="list-inline-item">
-                                        <a href="category.html#">
-                                            <i className="fab fa-telegram-plane" />
-                                        </a>
-                                    </li>
-                                    <li className="list-inline-item">
-                                        <a href="category.html#">
-                                            <i className="far fa-envelope" />
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div className="more-button float-end">
-                                <a href="blog-single.html">
-                                    <span className="icon-options" />
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div className="col-sm-6">
-                    {/* post */}
-                    <div className="post post-grid rounded bordered">
-                        <div className="thumb top-rounded">
-                            <a href="category.html" className="category-badge position-absolute">
-                                Culture
-                            </a>
-                            <a href="blog-single.html">
-                                <div className="inner">
-                                    <img src="images/posts/post-md-8.jpg" alt="post-title" />
-                                </div>
-                            </a>
-                        </div>
-                        <div className="details">
-                            <ul className="meta list-inline mb-0">
-                                <li className="list-inline-item">
-                                    <a href="category.html#">
-                                        <img
-                                            src="images/other/author-sm.png"
-                                            className="author"
-                                            alt="author"
-                                        />
-                                        Katen Doe
-                                    </a>
-                                </li>
-                                <li className="list-inline-item">29 March 2021</li>
-                            </ul>
-                            <h5 className="post-title mb-3 mt-3">
-                                <a href="blog-single.html">
-                                    An Incredibly Easy Method That Works For All
-                                </a>
-                            </h5>
-                            <p className="excerpt mb-0">
-                                I am so happy, my dear friend, so absorbed in the exquisite sense of
-                                mere tranquil existence.
-                            </p>
-                        </div>
-                        <div className="post-bottom clearfix d-flex align-items-center">
-                            <div className="social-share me-auto">
-                                <button className="toggle-button icon-share" />
-                                <ul className="icons list-unstyled list-inline mb-0">
-                                    <li className="list-inline-item">
-                                        <a href="category.html#">
-                                            <i className="fab fa-facebook-f" />
-                                        </a>
-                                    </li>
-                                    <li className="list-inline-item">
-                                        <a href="category.html#">
-                                            <i className="fab fa-twitter" />
-                                        </a>
-                                    </li>
-                                    <li className="list-inline-item">
-                                        <a href="category.html#">
-                                            <i className="fab fa-linkedin-in" />
-                                        </a>
-                                    </li>
-                                    <li className="list-inline-item">
-                                        <a href="category.html#">
-                                            <i className="fab fa-pinterest" />
-                                        </a>
-                                    </li>
-                                    <li className="list-inline-item">
-                                        <a href="category.html#">
-                                            <i className="fab fa-telegram-plane" />
-                                        </a>
-                                    </li>
-                                    <li className="list-inline-item">
-                                        <a href="category.html#">
-                                            <i className="far fa-envelope" />
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div className="more-button float-end">
-                                <a href="blog-single.html">
-                                    <span className="icon-options" />
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div className="col-sm-6">
-                    {/* post */}
-                    <div className="post post-grid rounded bordered">
-                        <div className="thumb top-rounded">
-                            <a href="category.html" className="category-badge position-absolute">
-                                Inspiration
-                            </a>
-                            <a href="blog-single.html">
-                                <div className="inner">
-                                    <img src="images/posts/post-md-9.jpg" alt="post-title" />
-                                </div>
-                            </a>
-                        </div>
-                        <div className="details">
-                            <ul className="meta list-inline mb-0">
-                                <li className="list-inline-item">
-                                    <a href="category.html#">
-                                        <img
-                                            src="images/other/author-sm.png"
-                                            className="author"
-                                            alt="author"
-                                        />
-                                        Katen Doe
-                                    </a>
-                                </li>
-                                <li className="list-inline-item">29 March 2021</li>
-                            </ul>
-                            <h5 className="post-title mb-3 mt-3">
-                                <a href="blog-single.html">
-                                    10 Ways To Immediately Start Selling Furniture
-                                </a>
-                            </h5>
-                            <p className="excerpt mb-0">
-                                I am so happy, my dear friend, so absorbed in the exquisite sense of
-                                mere tranquil existence.
-                            </p>
-                        </div>
-                        <div className="post-bottom clearfix d-flex align-items-center">
-                            <div className="social-share me-auto">
-                                <button className="toggle-button icon-share" />
-                                <ul className="icons list-unstyled list-inline mb-0">
-                                    <li className="list-inline-item">
-                                        <a href="category.html#">
-                                            <i className="fab fa-facebook-f" />
-                                        </a>
-                                    </li>
-                                    <li className="list-inline-item">
-                                        <a href="category.html#">
-                                            <i className="fab fa-twitter" />
-                                        </a>
-                                    </li>
-                                    <li className="list-inline-item">
-                                        <a href="category.html#">
-                                            <i className="fab fa-linkedin-in" />
-                                        </a>
-                                    </li>
-                                    <li className="list-inline-item">
-                                        <a href="category.html#">
-                                            <i className="fab fa-pinterest" />
-                                        </a>
-                                    </li>
-                                    <li className="list-inline-item">
-                                        <a href="category.html#">
-                                            <i className="fab fa-telegram-plane" />
-                                        </a>
-                                    </li>
-                                    <li className="list-inline-item">
-                                        <a href="category.html#">
-                                            <i className="far fa-envelope" />
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div className="more-button float-end">
-                                <a href="blog-single.html">
-                                    <span className="icon-options" />
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div className="col-sm-6">
-                    {/* post */}
-                    <div className="post post-grid rounded bordered">
-                        <div className="thumb top-rounded">
-                            <a href="category.html" className="category-badge position-absolute">
-                                Lifestyle
-                            </a>
-                            <span className="post-format">
-                                <i className="icon-earphones" />
-                            </span>
-                            <a href="blog-single.html">
-                                <div className="inner">
-                                    <img src="images/posts/post-md-10.jpg" alt="post-title" />
-                                </div>
-                            </a>
-                        </div>
-                        <div className="details">
-                            <ul className="meta list-inline mb-0">
-                                <li className="list-inline-item">
-                                    <a href="category.html#">
-                                        <img
-                                            src="images/other/author-sm.png"
-                                            className="author"
-                                            alt="author"
-                                        />
-                                        Katen Doe
-                                    </a>
-                                </li>
-                                <li className="list-inline-item">29 March 2021</li>
-                            </ul>
-                            <h5 className="post-title mb-3 mt-3">
-                                <a href="blog-single.html">
-                                    Now You Can Have Your Thoughts Done Safely
-                                </a>
-                            </h5>
-                            <p className="excerpt mb-0">
-                                I am so happy, my dear friend, so absorbed in the exquisite sense of
-                                mere tranquil existence.
-                            </p>
-                        </div>
-                        <div className="post-bottom clearfix d-flex align-items-center">
-                            <div className="social-share me-auto">
-                                <button className="toggle-button icon-share" />
-                                <ul className="icons list-unstyled list-inline mb-0">
-                                    <li className="list-inline-item">
-                                        <a href="category.html#">
-                                            <i className="fab fa-facebook-f" />
-                                        </a>
-                                    </li>
-                                    <li className="list-inline-item">
-                                        <a href="category.html#">
-                                            <i className="fab fa-twitter" />
-                                        </a>
-                                    </li>
-                                    <li className="list-inline-item">
-                                        <a href="category.html#">
-                                            <i className="fab fa-linkedin-in" />
-                                        </a>
-                                    </li>
-                                    <li className="list-inline-item">
-                                        <a href="category.html#">
-                                            <i className="fab fa-pinterest" />
-                                        </a>
-                                    </li>
-                                    <li className="list-inline-item">
-                                        <a href="category.html#">
-                                            <i className="fab fa-telegram-plane" />
-                                        </a>
-                                    </li>
-                                    <li className="list-inline-item">
-                                        <a href="category.html#">
-                                            <i className="far fa-envelope" />
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div className="more-button float-end">
-                                <a href="blog-single.html">
-                                    <span className="icon-options" />
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <Pagination
-                currentPage={10}
-                totalPages={50}
-                onPageChange={(p) => console.log("Go page:", p)}
-            />
-        </>
-    )
-}
+                {posts.length === 0 && (
+                    <p className="text-center w-full">No posts found.</p>
+                )}
 
-export default CategoryContainer
+                {posts.map((post) => (
+                    <div className="col-sm-6" key={post.id}>
+                        {/* post */}
+                        <div className="post post-grid rounded bordered">
+                            <div className="thumb top-rounded">
+                                <Link
+                                    href={`/category/${post.category?.slug}`}
+                                    className="category-badge position-absolute"
+                                >
+                                    {post.category?.name || 'Category'}
+                                </Link>
+                                {post?.cover_image && (
+                                    <Link href={`/${post?.slug}`}>
+                                        <div className="inner">
+                                            <img src={post?.cover_image} alt={post?.title} />
+                                        </div>
+                                    </Link>
+                                )}
+                            </div>
+                            <div className="details">
+                                <ul className="meta list-inline mb-0">
+                                    <li className="list-inline-item">
+                                        <a href="#">
+                                            {post.author?.avatar && (
+                                                <img
+                                                    src={post.author.avatar}
+                                                    className="author"
+                                                    alt={post.author.name}
+                                                />
+                                            )}
+                                            {post.author?.name || 'Unknown'}
+                                        </a>
+                                    </li>
+                                    <li className="list-inline-item">
+                                        {new Date(post.created_at).toLocaleDateString()}
+                                    </li>
+                                </ul>
+                                <h5 className="post-title mb-3 mt-3">
+                                    <Link href={`/${post.slug}`}>{post.title}</Link>
+                                </h5>
+                                <p className="excerpt mb-0">{post.excerpt}</p>
+                            </div>
+                        </div>
+                    </div>
+                ))}
+            </div>
+
+            {total > 0 && (
+                <Pagination
+                    currentPage={page}
+                    totalPages={Math.ceil(total / 10)}
+                    onPageChange={(p) => setPage(p)}
+                />
+            )}
+        </>
+    );
+};
+
+export default CategoryContainer;

@@ -21,7 +21,7 @@ const HomePage = () => {
                 <div className="ads-horizontal text-md-center">
                     <span className="ads-title">- Sponsored Ad -</span>
                     <a href="index.html#">
-                        <img src="https://placehold.co/600x100" alt="Advertisement" />
+                        <img src="https://placehold.co/800x120" alt="Advertisement" />
                     </a>
                 </div>
                 <div className="spacer" style={{

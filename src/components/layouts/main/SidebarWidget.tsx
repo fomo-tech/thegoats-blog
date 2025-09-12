@@ -1,4 +1,4 @@
-'use client'
+
 
 import CategoriesPost from '@/components/post/CategoriesPost'
 import PopularPost from '@/components/post/PopularPost'
