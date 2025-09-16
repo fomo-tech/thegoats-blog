@@ -22,7 +22,6 @@ const BlockRenderer = (block: EditorBlock, index: number) => {
             return (
                 <p
                     key={index}
-                    className=""
                     dangerouslySetInnerHTML={{ __html: data.text }}
                 />
             )
@@ -39,9 +38,11 @@ const BlockRenderer = (block: EditorBlock, index: number) => {
             }[data.level] || 'text-xl font-semibold my-4'
 
             return (
-                <Tag key={index} className={`${headerClass} text-gray-900 dark:text-gray-100`}>
-                    {data.text}
-                </Tag>
+                <Tag
+                    key={index}
+                    className={`${headerClass} text-gray-900 dark:text-gray-100`}
+                    dangerouslySetInnerHTML={{ __html: data.text }}
+                />
             )
         }
 
@@ -49,13 +50,13 @@ const BlockRenderer = (block: EditorBlock, index: number) => {
             return (
                 <ul
                     key={index}
-                    className={`${data.style === 'unordered' ? 'list-disc' : 'list-decimal'
-                        }`}
+                    className={data.style === 'unordered' ? 'list-disc pl-5' : 'list-decimal pl-5'}
                 >
                     {data.items.map((item: any, i: number) => (
-                        <li key={i} >
-                            {item?.content}
-                        </li>
+                        <li
+                            key={i}
+                            dangerouslySetInnerHTML={{ __html: item?.content || item }}
+                        />
                     ))}
                 </ul>
             )
@@ -86,7 +87,10 @@ const BlockRenderer = (block: EditorBlock, index: number) => {
                         className="mx-auto rounded-md shadow-md"
                     />
                     {data.caption && (
-                        <p className="mt-2 text-sm text-gray-500 italic">{data.caption}</p>
+                        <p
+                            className="mt-2 text-sm text-gray-500 italic"
+                            dangerouslySetInnerHTML={{ __html: data.caption }}
+                        />
                     )}
                 </div>
             )
@@ -96,18 +100,17 @@ const BlockRenderer = (block: EditorBlock, index: number) => {
                 <blockquote
                     key={index}
                     className="border-l-4 border-gray-300 dark:border-gray-600 pl-4 italic text-gray-600 dark:text-gray-300 my-4"
-                >
-                    {data.text}
-                </blockquote>
+                    dangerouslySetInnerHTML={{ __html: data.text }}
+                />
             )
 
         case 'code':
             return (
                 <pre
                     key={index}
-                    className="bg-gray-200  text-sm p-4 rounded-md overflow-x-auto my-4 text-gray-500 "
+                    className="bg-gray-200 text-sm p-4 rounded-md overflow-x-auto my-4 text-gray-800 dark:bg-gray-700 dark:text-gray-100"
                 >
-                    <code>{data.code}</code>
+                    <code dangerouslySetInnerHTML={{ __html: data.code }} />
                 </pre>
             )
 
@@ -125,7 +128,10 @@ const BlockRenderer = (block: EditorBlock, index: number) => {
                         allowFullScreen
                     />
                     {data.caption && (
-                        <p className="text-sm text-gray-500 italic mt-2 text-center">{data.caption}</p>
+                        <p
+                            className="text-sm text-gray-500 italic mt-2 text-center"
+                            dangerouslySetInnerHTML={{ __html: data.caption }}
+                        />
                     )}
                 </div>
             )

@@ -2,6 +2,8 @@
 import Breadcrumb from '@/components/ Breadcrumb'
 import EditorRenderer from '@/components/editor/EditorRenderer'
 import MainContent from '@/components/layouts/main/MainContent'
+import CommentForm from '@/components/ui/CommentForm'
+import ListComment from '@/components/ui/ListComment'
 import { getPostBySlug } from '@/lib/db/post'
 import { mainRoutes } from '@/routes/main'
 import { Metadata } from 'next'
@@ -33,9 +35,6 @@ export default async function PostSinglePage(props: { params: Params }) {
 
     if (!post) return notFound()
     if (post.status !== 'published') return notFound()
-
-
-
 
     return (
         <MainContent breadcrumb={<Breadcrumb
@@ -122,6 +121,8 @@ export default async function PostSinglePage(props: { params: Params }) {
                 </div>
             </div>
             <div className="spacer" data-height={50} style={{ height: '50px' }} />
+            <CommentForm />
+            <ListComment />
         </MainContent>
 
     )
