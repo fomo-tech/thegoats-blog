@@ -40,7 +40,7 @@ const TrendingPosts = async () => {
                 </li>
             </ul>
             <h5 className="post-title mb-3 mt-3">
-                <Link href={`/post/${post.slug}`}>{post.title}</Link>
+                <Link href={`/${post.slug}`}>{post.title}</Link>
             </h5>
             {post.excerpt && <p className="excerpt mb-0">{post.excerpt}</p>}
         </div>
@@ -49,7 +49,7 @@ const TrendingPosts = async () => {
     const renderSmallPost = (post: any) => (
         <div className="post post-list-sm square before-seperator" key={post.id}>
             <div className="thumb rounded">
-                <Link href={`/post/${post.slug}`}>
+                <Link href={`/${post.slug}`}>
                     <div className="inner">
                         <Image
                             src={post.cover_image || '/images/default.jpg'}
@@ -63,7 +63,7 @@ const TrendingPosts = async () => {
             </div>
             <div className="details clearfix">
                 <h6 className="post-title my-0">
-                    <Link href={`/post/${post.slug}`}>{post.title}</Link>
+                    <Link href={`/${post.slug}`}>{post.title}</Link>
                 </h6>
                 <ul className="meta list-inline mt-1 mb-0">
                     <li className="list-inline-item">

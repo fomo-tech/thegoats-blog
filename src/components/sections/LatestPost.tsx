@@ -1,4 +1,5 @@
 import { getPostLists } from '@/lib/db/post'
+import Link from 'next/link'
 import React from 'react'
 
 const LatestPost = async () => {
@@ -16,11 +17,11 @@ const LatestPost = async () => {
                         <div className="col-md-12 col-sm-6" key={post.id}>
                             <div className="post post-list clearfix">
                                 <div className="thumb rounded">
-                                    <a href={`/post/${post.slug}`}>
+                                    <Link href={`/${post.slug}`}>
                                         <div className="inner">
                                             <img src={post.cover_image} alt={post.title} />
                                         </div>
-                                    </a>
+                                    </Link>
                                 </div>
                                 <div className="details">
                                     <ul className="meta list-inline mb-3">
@@ -39,9 +40,9 @@ const LatestPost = async () => {
                                         </li>
                                     </ul>
                                     <h5 className="post-title">
-                                        <a href={`/post/${post.slug}`}>
+                                        <Link href={`/${post.slug}`}>
                                             {post.title}
-                                        </a>
+                                        </Link>
                                     </h5>
                                     <p className="excerpt mb-0">
                                         {post.seo_description}
@@ -50,24 +51,24 @@ const LatestPost = async () => {
                                         <div className="social-share me-auto">
                                             <ul className="icons list-unstyled list-inline mb-0 visible">
                                                 <li className="list-inline-item">
-                                                    <a href="#">
+                                                    <Link href="#">
                                                         <i className="fab fa-facebook-f" />
-                                                    </a>
+                                                    </Link>
                                                 </li>
                                                 <li className="list-inline-item">
-                                                    <a href="#">
+                                                    <Link href="#">
                                                         <i className="fab fa-twitter" />
-                                                    </a>
+                                                    </Link>
                                                 </li>
                                                 <li className="list-inline-item">
-                                                    <a href="#">
+                                                    <Link href="#">
                                                         <i className="fab fa-linkedin-in" />
-                                                    </a>
+                                                    </Link>
                                                 </li>
                                                 <li className="list-inline-item">
-                                                    <a href="#">
+                                                    <Link href="#">
                                                         <i className="fab fa-pinterest" />
-                                                    </a>
+                                                    </Link>
                                                 </li>
                                                 <li className="list-inline-item">
                                                     <a href="#">

@@ -12,7 +12,7 @@ export default function PostTabs({
     popularPosts: any[]
     recentPosts: any[]
 }) {
-    const [activeTab, setActiveTab] = useState<'popular' | 'recent'>('popular')
+    const [activeTab, setActiveTab] = useState<'popular' | 'recent'>('recent')
 
     const renderPosts = (posts: any[]) => (
         <>
@@ -27,20 +27,21 @@ export default function PostTabs({
             <ul className="nav nav-tabs nav-pills nav-fill" role="tablist">
                 <li className="nav-item" role="presentation">
                     <button
-                        className={`nav-link ${activeTab === 'popular' ? 'active' : ''}`}
-                        onClick={() => setActiveTab('popular')}
-                    >
-                        Phổ biến
-                    </button>
-                </li>
-                <li className="nav-item" role="presentation">
-                    <button
                         className={`nav-link ${activeTab === 'recent' ? 'active' : ''}`}
                         onClick={() => setActiveTab('recent')}
                     >
                         Mới nhất
                     </button>
                 </li>
+                <li className="nav-item" role="presentation">
+                    <button
+                        className={`nav-link ${activeTab === 'popular' ? 'active' : ''}`}
+                        onClick={() => setActiveTab('popular')}
+                    >
+                        Phổ biến
+                    </button>
+                </li>
+
             </ul>
 
             <div className="tab-content">

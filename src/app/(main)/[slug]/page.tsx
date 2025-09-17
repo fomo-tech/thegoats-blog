@@ -42,7 +42,9 @@ export default async function PostSinglePage(props: { params: Params }) {
                 { label: 'Trang chủ', href: mainRoutes('home') },
                 { label: post.title || 'Bài viết', href: '#' },
             ]}
-        />}>
+        />}
+            slugCategory={post.category?.slug}
+        >
             <div className="post post-single">
                 {/* Header bài viết */}
                 <div className="post-header">

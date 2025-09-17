@@ -1,5 +1,7 @@
-import { getHeroPosts, getPostLists } from '@/lib/db/post'
+
+import { getPostLists } from '@/lib/db/post'
 import { format } from 'date-fns'
+import Link from 'next/link'
 import React from 'react'
 
 const FeaturedPosts = async () => {
@@ -24,29 +26,29 @@ const FeaturedPosts = async () => {
                                 <a href={`/category/${firstPost.category_slug}`} className="category-badge position-absolute">
                                     {firstPost?.category?.name}
                                 </a>
-                                <a href={`/post/${firstPost.slug}`}>
+                                <Link href={`/${firstPost.slug}`}>
                                     <div className="inner">
                                         <img src={firstPost.cover_image} alt={firstPost.title} />
                                     </div>
-                                </a>
+                                </Link>
                             </div>
                             <ul className="meta list-inline mt-4 mb-0">
                                 <li className="list-inline-item">
-                                    <a href="#">
+                                    <Link href="#">
                                         <img
                                             src={firstPost.author_avatar}
                                             className="author"
                                             alt={firstPost.author_name}
                                         />
                                         {firstPost.author_name}
-                                    </a>
+                                    </Link>
                                 </li>
                                 <li className="list-inline-item">
                                     {format(new Date(firstPost.published_at), 'dd/MM/yyyy HH:mm')}
                                 </li>
                             </ul>
                             <h5 className="post-title mb-3 mt-3">
-                                <a href={`/post/${firstPost.slug}`}>
+                                <a href={`/${firstPost.slug}`}>
                                     {firstPost.title}
                                 </a>
                             </h5>
@@ -61,17 +63,17 @@ const FeaturedPosts = async () => {
                         {otherPosts.map((post, idx) => (
                             <div key={idx} className="post post-list-sm square">
                                 <div className="thumb rounded">
-                                    <a href={`/post/${post.slug}`}>
+                                    <Link href={`/${post.slug}`}>
                                         <div className="inner">
                                             <img src={post.cover_image} alt={post.title} />
                                         </div>
-                                    </a>
+                                    </Link>
                                 </div>
                                 <div className="details clearfix">
                                     <h6 className="post-title my-0">
-                                        <a href={`/post/${post.slug}`}>
+                                        <Link href={`/${post.slug}`}>
                                             {post.title}
-                                        </a>
+                                        </Link>
                                     </h6>
                                     <ul className="meta list-inline mt-1 mb-0">
                                         <li className="list-inline-item">

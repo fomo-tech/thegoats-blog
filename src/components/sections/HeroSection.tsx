@@ -4,7 +4,7 @@ import PostTabs from '../PostTabs'
 
 
 export default async function HeroSection() {
-    const { featuredPost, popularPosts, recentPosts } = await getHeroPosts()
+    const { featuredPost, popularPosts, recentPosts } = await getHeroPosts() as any
 
     if (!featuredPost || !popularPosts || !recentPosts) return null
 
@@ -17,7 +17,7 @@ export default async function HeroSection() {
                     <div className="md:w-2/3">
                         <div className="post featured-post-lg">
                             <div className="details clearfix">
-                                <a className="category-badge">{featuredPost.category?.name}</a>
+                                <div className="category-badge">{featuredPost.category?.name}</div>
                                 <h2 className="post-title">
                                     <Link href={`/${featuredPost.slug}`}>{featuredPost.title}</Link>
                                 </h2>

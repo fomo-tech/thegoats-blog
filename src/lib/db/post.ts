@@ -84,20 +84,27 @@ export async function getHeroPosts() {
   const { data, error } = await supabase
     .from('posts')
     .select(`
-      id, title, slug, is_featured,is_published, is_trending,cover_image,
+      id, title, slug, is_featured, is_published, is_trending, cover_image,
       category:category_id ( name ),
       published_at
     `)
+    .eq('is_published', true) // chỉ lấy bài đã publish
     .order('published_at', { ascending: false })
 
   if (error) throw error
 
-  const featuredPost = data.find(p => p.is_published)
-  const popularPosts = data.slice(0, 4)
-  const recentPosts = [...data].reverse().slice(0, 4)
+  // Lấy bài featured đầu tiên
+  const featuredPost = data.find(p => p.is_featured)
 
-  return { featuredPost, popularPosts, recentPosts } as any
+  // Lấy 4 bài trending (nếu có)
+  const popularPosts = data.filter(p => p.is_trending).slice(0, 4)
+
+  // Lấy 4 bài mới nhất
+  const recentPosts = data.slice(0, 4)
+
+  return { featuredPost, popularPosts, recentPosts } as const
 }
+
 
 // lib/db/posts.ts
 export async function getPostsPaginatedWithFilters({

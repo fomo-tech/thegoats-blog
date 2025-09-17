@@ -4,33 +4,33 @@
 import MainContent from "@/components/layouts/main/MainContent"
 import PageHeader from "@/components/ui/PageHeader"
 import CategoryContainer from "./component/CategoryContainer"
-import { getCategoryBySlug } from "@/lib/db/categories"
+import { getTagBySlug } from "@/lib/db/categories"
 import { notFound } from "next/navigation";
 
-interface CategoryPageProps {
+interface TagPageProps {
     params: Promise<{ slug: string }>;
 }
 
 
-const CategoryPage = async ({ params }: CategoryPageProps) => {
+const TagPage = async ({ params }: TagPageProps) => {
     const { slug } = await params;
-    const category = await getCategoryBySlug(slug)
+    const tag = await getTagBySlug(slug)
 
-    if (!category) return notFound()
+    if (!tag) return notFound()
     return (
         <>
             <PageHeader
-                title={category?.name}
+                title={`#${tag?.name}`}
                 breadcrumbs={[
                     { label: "Home", href: "/" },
-                    { label: category?.name, href: `/category/${category.slug}` }
+                    { label: `#${tag?.name}`, href: `/tag/${tag.slug}` }
                 ]}
             />
-            <MainContent slugCategory={slug}>
-                <CategoryContainer categorySlug={slug} />
+            <MainContent tagCategrory={slug}>
+                1
             </MainContent>
         </>
     )
 }
 
-export default CategoryPage
+export default TagPage

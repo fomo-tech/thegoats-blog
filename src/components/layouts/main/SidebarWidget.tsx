@@ -5,8 +5,12 @@ import PopularPost from '@/components/post/PopularPost'
 import TagsPost from '@/components/post/TagsPost'
 import React from 'react'
 
+interface SidebarWidgetProps {
+    slugCategory?: string,
+    tagCategrory?: string,
+}
 
-const SidebarWidget = () => {
+const SidebarWidget = ({ slugCategory, tagCategrory }: SidebarWidgetProps) => {
     return (
         <>
 
@@ -18,8 +22,8 @@ const SidebarWidget = () => {
                 </a>
             </div>
             <PopularPost />
-            <CategoriesPost />
-            <TagsPost />
+            <CategoriesPost currentSlug={slugCategory} />
+            <TagsPost tagCategrory={tagCategrory} />
 
         </>
     )

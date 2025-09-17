@@ -5,8 +5,10 @@ import SidebarWidget from './SidebarWidget'
 interface MainContentProps {
     children: React.ReactNode,
     breadcrumb?: React.ReactNode,
+    slugCategory?: string,
+    tagCategrory?: string,
 }
-const MainContent = ({ children, breadcrumb }: MainContentProps) => {
+const MainContent = ({ children, breadcrumb, slugCategory, tagCategrory }: MainContentProps) => {
     return (
         <section className="main-content">
             <div className="container-xl">
@@ -18,7 +20,7 @@ const MainContent = ({ children, breadcrumb }: MainContentProps) => {
                     <div className="col-lg-4">
                         {/* sidebar */}
                         <div className="sidebar">
-                            <SidebarWidget />
+                            <SidebarWidget slugCategory={slugCategory} tagCategrory={tagCategrory} />
                         </div>
                     </div>
                 </div>
