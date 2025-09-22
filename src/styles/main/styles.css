@@ -2136,13 +2136,15 @@ section {
     color: #203656;
     font-weight: 700;
 }
-.widget ul.list li a:before {
+.widget ul.list li a::after {
     content: "";
     color: #fe4f70;
     font-family: "simple-line-icons";
     font-size: 11px;
     vertical-align: middle;
     margin-right: 25px;
+    position: absolute;
+    right: 0;
 }
 .widget ul.list li a:hover {
     color: #fe4f70;
