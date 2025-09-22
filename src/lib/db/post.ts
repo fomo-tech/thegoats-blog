@@ -271,6 +271,76 @@ export async function getPostBySlugTagPaginate({
   return { posts: (data as Post[]) ?? [], total: count ?? 0 };
 }
 
+export async function postComment({
+  postId,
+  name,
+  content,
+}: {
+  postId: string;
+  name: string;
+  content: string;
+}) {
+  const { data, error } = await supabase
+    .from("comments")
+    .insert([
+      {
+        post_id: postId,
+        name,
+        content,
+      },
+    ])
+    .select(); // trả về dữ liệu vừa insert
+
+  if (error) {
+    console.error("Error inserting comment:", error.message);
+    throw new Error(error.message);
+  }
+
+  return data?.[0] ?? null;
+}
+
+export async function getComments({
+  filter: { page = 1, pageSize = 10 } = {},
+}: {
+  filter: {
+    page?: number;
+    pageSize?: number;
+  };
+}): Promise<{ comments: any[]; total: number }> {
+  try {
+    // Tính range
+    const from = (page - 1) * pageSize;
+    const to = page * pageSize - 1;
+
+    // 1. Đếm tổng số comment
+    const { count, error: countError } = await supabase
+      .from("comments")
+      .select("*", { count: "exact", head: true });
+
+    if (countError) {
+      console.error("Count error:", countError.message);
+      return { comments: [], total: 0 };
+    }
+
+    // 2. Lấy danh sách comment theo phân trang
+    const { data, error } = await supabase
+      .from("comments")
+      .select("*")
+      .order("created_at", { ascending: false })
+      .range(from, to);
+
+    if (error) {
+      console.error("Fetch comments error:", error.message);
+      return { comments: [], total: 0 };
+    }
+
+    return { comments: data ?? [], total: count ?? 0 };
+  } catch (err) {
+    console.error("Unexpected error:", err);
+    return { comments: [], total: 0 };
+  }
+}
+
 export async function getPostsPaginated(
   page = 1,
   pageSize = 10

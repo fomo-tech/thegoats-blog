@@ -46,11 +46,19 @@ create table post_tags (
   primary key (post_id, tag_id)
 );
 
--- 5. comments
-create table comments (
-  id uuid primary key default uuid_generate_v4(),
-  post_id uuid references posts(id) on delete cascade,
-  author_id uuid references profile(id) on delete set null,
-  content text not null,
-  created_at timestamp default now()
+-- Tạo bảng comments dùng UUID cho post_id
+CREATE TABLE comments (
+    id UUID DEFAULT gen_random_uuid() PRIMARY KEY,  -- ID comment cũng dùng UUID
+    post_id UUID NOT NULL,                          -- Tham chiếu đến posts.id
+    name VARCHAR(100) NOT NULL,                     -- Tên người comment
+    content TEXT NOT NULL,                          -- Nội dung comment
+    created_at TIMESTAMPTZ DEFAULT NOW(),           -- Thời gian tạo
+    CONSTRAINT fk_post
+        FOREIGN KEY (post_id) 
+        REFERENCES posts(id)
+        ON DELETE CASCADE
 );
+
+-- Index để query nhanh theo bài viết
+CREATE INDEX idx_comments_post_id ON comments(post_id);
+
