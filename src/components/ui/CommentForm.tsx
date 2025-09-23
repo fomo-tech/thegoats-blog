@@ -1,6 +1,7 @@
 "use client";
 
 import { postComment } from "@/lib/db/post";
+import { useGlobalStore } from "@/store/useGlobalStore";
 import React, { useState } from "react";
 
 interface CommentFormProps {
@@ -8,6 +9,8 @@ interface CommentFormProps {
 }
 
 const CommentForm = ({ postId }: CommentFormProps) => {
+  const { callBackListComment } = useGlobalStore();
+
   const [name, setName] = useState("");
   const [comment, setComment] = useState("");
   const [error, setError] = useState("");
@@ -41,6 +44,7 @@ const CommentForm = ({ postId }: CommentFormProps) => {
       setSuccess(`Cám ơn ${name}, bình luận của bạn đã được gửi!`);
       setName("");
       setComment("");
+      callBackListComment();
     } catch (err) {
       setError("Đã xảy ra lỗi. Vui lòng thử lại.");
     } finally {

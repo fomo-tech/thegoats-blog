@@ -24,6 +24,50 @@ export type Post = {
   seo_description?: string | null;
 };
 
+export async function getPostBySearch({
+  keyword,
+  filter: { page = 1, pageSize = 10 } = {},
+}: {
+  keyword: string;
+  filter?: {
+    page?: number;
+    pageSize?: number;
+  };
+}): Promise<{ posts: Post[]; total: number }> {
+  try {
+    const from = (page - 1) * pageSize;
+    const to = page * pageSize - 1;
+
+    const { data, error, count } = await supabase
+      .from("posts")
+      .select(
+        `
+      *,
+      category:categories ( id, name,slug ),
+      post_tags (
+        tag:tags ( id, name,slug )
+      )
+    `,
+        { count: "exact" }
+      )
+      .textSearch("title", keyword, {
+        type: "websearch",
+      })
+      .range(from, to)
+      .order("created_at", { ascending: false });
+
+    if (error) throw error;
+
+    return {
+      posts: data ?? [],
+      total: count ?? 0,
+    };
+  } catch (err) {
+    console.error("Error in getPostBySearch:", err);
+    return { posts: [], total: 0 };
+  }
+}
+
 export async function getPostLists() {
   // Trending: Lấy 10 bài is_trending = true và is_published = true
   const { data: trendingPosts, error: trendingError } = await supabase
@@ -299,33 +343,24 @@ export async function postComment({
   return data?.[0] ?? null;
 }
 
-export async function getComments({
+export async function getCommentsByPostId({
+  postId,
   filter: { page = 1, pageSize = 10 } = {},
 }: {
-  filter: {
+  postId: string;
+  filter?: {
     page?: number;
     pageSize?: number;
   };
 }): Promise<{ comments: any[]; total: number }> {
   try {
-    // Tính range
     const from = (page - 1) * pageSize;
     const to = page * pageSize - 1;
 
-    // 1. Đếm tổng số comment
-    const { count, error: countError } = await supabase
+    const { data, count, error } = await supabase
       .from("comments")
-      .select("*", { count: "exact", head: true });
-
-    if (countError) {
-      console.error("Count error:", countError.message);
-      return { comments: [], total: 0 };
-    }
-
-    // 2. Lấy danh sách comment theo phân trang
-    const { data, error } = await supabase
-      .from("comments")
-      .select("*")
+      .select("*", { count: "exact" })
+      .eq("post_id", postId)
       .order("created_at", { ascending: false })
       .range(from, to);
 
@@ -377,7 +412,7 @@ export async function getPostBySlug(slug: string): Promise<any | null> {
       *,
       category:categories (*),
       post_tags(
-        tag:tags(id, name)
+        tag:tags(id, name,slug)
       )
     `
     )

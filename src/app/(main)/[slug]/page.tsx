@@ -6,6 +6,7 @@ import ListComment from "@/components/ui/ListComment";
 import { getPostBySlug } from "@/lib/db/post";
 import { mainRoutes } from "@/routes/main";
 import { Metadata } from "next";
+import Link from "next/link";
 import { notFound } from "next/navigation";
 import React from "react";
 
@@ -78,9 +79,9 @@ export default async function PostSinglePage(props: { params: Params }) {
               {post.post_tags?.length > 0 && (
                 <div className="text-start">
                   {post.post_tags.map((item: any, idx: number) => (
-                    <span key={idx} className="tag me-1">
-                      #{item?.tag.name}
-                    </span>
+                    <Link href={"/tag/" + item?.tag.slug} key={idx}>
+                      <span className="tag me-1">#{item?.tag.name}</span>
+                    </Link>
                   ))}
                 </div>
               )}
@@ -125,7 +126,7 @@ export default async function PostSinglePage(props: { params: Params }) {
       </div>
       <div className="spacer" data-height={50} style={{ height: "50px" }} />
       <CommentForm postId={post?.id} />
-      <ListComment />
+      <ListComment postId={post?.id} />
     </MainContent>
   );
 }
