@@ -1,5 +1,6 @@
 import React from "react";
-
+import logo from "@/assets/images/logo.png";
+import Image from "next/image";
 const Footer = () => {
   return (
     <footer className="bg-gray-800 text-gray-400 font-sans py-12 px-4 border-t-4 border-yellow-500">
@@ -7,14 +8,7 @@ const Footer = () => {
         {/* About Section */}
         <div className="max-w-md lg:w-1/4 flex-shrink-0">
           <div className="flex items-center space-x-2 mb-4">
-            <img
-              src="/images/cryptodnes-logo.png"
-              alt="CryptoDnes Logo"
-              className="h-8"
-            />
-            <h2 className="text-2xl font-bold text-yellow-500">
-              Crypto<span className="text-white">Dnes</span>
-            </h2>
+            <Image width={200} height={70} alt="Logo crypto fomos" src={logo} />
           </div>
           <p className="text-sm leading-relaxed">
             Tin tức và phân tích về tiền điện tử và chuỗi khối - Altcoin,
@@ -85,7 +79,7 @@ const Footer = () => {
               <i className="fab fa-tiktok"></i>
             </a>
           </div>
-          <p className="text-sm text-gray-500 mt-4">&copy; 2025 CryptoDnes</p>
+          <p className="text-sm text-[#fff] mt-4">&copy; 2025 Cryptofomo</p>
         </div>
       </div>
     </footer>

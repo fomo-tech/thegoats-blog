@@ -4,7 +4,8 @@ import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import SeachPopup from "../SeachPopup";
 import { usePathname } from "next/navigation";
-
+import logo from "@/assets/images/logo.png";
+import Image from "next/image";
 const menuItems = [
   {
     label: "Tin tức",
@@ -122,7 +123,7 @@ export default function MainHeader() {
         <div className="container">
           {/* Logo */}
           <Link className="navbar-brand" href="/">
-            logo
+            <Image width={200} height={70} alt="Logo crypto fomos" src={logo} />
           </Link>
 
           <div className="bs-collapse navbar-collapse">{renderMenu(false)}</div>

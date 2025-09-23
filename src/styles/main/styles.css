@@ -2500,7 +2500,7 @@ button:focus {
     #fe4f70 51%,
     #ffa387 100%
   );
-  background: linear-gradient(to top, #ffa387 0%, #fe4f70 51%, #ffa387 100%);
+  background: linear-gradient(to top, #ffa54c 0%, #fe4f70 51%, #ff7e5f 100%);
   background-size: auto 200%;
   display: inline-flex;
   justify-content: center;
@@ -2747,7 +2747,7 @@ button:focus {
     #fe4f70 51%,
     #ffa387 100%
   );
-  background: linear-gradient(to top, #ffa387 0%, #fe4f70 51%, #ffa387 100%);
+  background: linear-gradient(to top, #ffa54c 0%, #fe4f70 51%, #ff7e5f 100%);
   background-size: auto 200%;
   -webkit-box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.15);
   -moz-box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.15);
@@ -2784,7 +2784,7 @@ button:focus {
     #fe4f70 51%,
     #ffa387 100%
   );
-  background: linear-gradient(to top, #ffa387 0%, #fe4f70 51%, #ffa387 100%);
+  background: linear-gradient(to top, #ffa54c 0%, #fe4f70 51%, #ff7e5f 100%);
   background-size: auto 200%;
   border-color: transparent;
 }

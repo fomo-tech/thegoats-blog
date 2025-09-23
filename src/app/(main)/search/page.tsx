@@ -4,25 +4,22 @@ import PageHeader from "@/components/ui/PageHeader";
 import { mainRoutes } from "@/routes/main";
 import React from "react";
 import SearchContainer from "./component/SearchContainer";
+import { SearchParams } from "@/types";
 
-interface SearchPageProps {
-  searchParams: { q?: string };
-}
-
-const SearchPage = ({ searchParams }: SearchPageProps) => {
-  const query = searchParams.q || "";
-
+const SearchPage = async ({ searchParams }: { searchParams: SearchParams }) => {
+  const sp = await searchParams;
+  const keyword = sp.q || "";
   return (
     <>
       <PageHeader
         title={"Tìm kiếm"}
         breadcrumbs={[
           { label: "Home", href: "/" },
-          { label: "Tìm kiếm cho #" + query },
+          { label: "Tìm kiếm cho #" + keyword },
         ]}
       />
       <MainContent>
-        <SearchContainer query={query} />
+        <SearchContainer query={keyword} />
       </MainContent>
       ;
     </>
