@@ -18,6 +18,7 @@ const SeachPopup: React.FC<SeachPopupProps> = ({ isOpen, onClose }) => {
     const query = formData.get("q") as string;
     if (query) router.push(`/search?q=${encodeURIComponent(query)}`);
     onClose();
+    e.currentTarget.reset();
   };
 
   // ESC key close
@@ -51,7 +52,7 @@ const SeachPopup: React.FC<SeachPopupProps> = ({ isOpen, onClose }) => {
       {/* content */}
       <div className="search-content">
         <div className="text-center">
-          <h3 className="mb-4 mt-0">Press ESC to close</h3>
+          <h3 className="mb-4 mt-0">Tìm kiếm với từ khoá của bạn</h3>
         </div>
         {/* form */}
         <form className="d-flex search-form" onSubmit={handleSubmit}>

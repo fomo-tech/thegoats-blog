@@ -45,7 +45,7 @@ const PostListItem: React.FC<PostListItemProps> = ({
       </div>
       <div className="details clearfix">
         <h6 className="post-title my-0">
-          <a href={`/${post.slug}`}>{post.title}</a>
+          <Link href={`/${post.slug}`}>{post.title}</Link>
         </h6>
         <ul className="meta list-inline mt-1 mb-0">
           <li className="list-inline-item !flex items-center gap-1">

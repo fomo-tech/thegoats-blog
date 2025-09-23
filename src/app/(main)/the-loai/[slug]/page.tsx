@@ -1,8 +1,9 @@
 import MainContent from "@/components/layouts/main/MainContent";
 import PageHeader from "@/components/ui/PageHeader";
-import CategoryContainer from "./component/CategoryContainer";
+
 import { getCategoryBySlug } from "@/lib/db/categories";
 import { notFound } from "next/navigation";
+import CategoryContainer from "./component/CategoryContainer";
 
 interface CategoryPageProps {
   params: Promise<{ slug: string }>;
@@ -19,7 +20,7 @@ const CategoryPage = async ({ params }: CategoryPageProps) => {
         title={category?.name}
         breadcrumbs={[
           { label: "Home", href: "/" },
-          { label: category?.name, href: `/category/${category.slug}` },
+          { label: category?.name, href: `/the-loai/${category.slug}` },
         ]}
       />
       <MainContent slugCategory={slug}>

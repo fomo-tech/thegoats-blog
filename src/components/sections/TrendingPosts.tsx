@@ -15,7 +15,7 @@ const TrendingPosts = async () => {
     <div className="post">
       <div className="thumb rounded">
         <Link
-          href={`/category/${post.category?.name || ""}`}
+          href={`/the-loai/${post.category?.name || ""}`}
           className="category-badge position-absolute"
         >
           {post.category?.name || "Uncategorized"}

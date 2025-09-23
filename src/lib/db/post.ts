@@ -420,7 +420,7 @@ export async function getPostBySlug(slug: string): Promise<any | null> {
     .single();
 
   if (error) {
-    throw new Error("Lỗi khi lấy bài viết theo slug: " + error.message);
+    return null;
   }
   if (!data) return null;
   const { error: updateError } = await supabase
@@ -430,6 +430,7 @@ export async function getPostBySlug(slug: string): Promise<any | null> {
 
   if (updateError) {
     console.error("Lỗi khi tăng view:", updateError.message);
+    return null;
   }
 
   return {

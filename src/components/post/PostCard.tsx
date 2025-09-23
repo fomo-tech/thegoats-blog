@@ -23,12 +23,12 @@ interface PostCardProps {
 
 const PostCard: React.FC<PostCardProps> = ({ post }) => {
   return (
-    <div className="post post-grid rounded bordered">
+    <div className="post post-grid rounded bordered h-full">
       <div className="thumb top-rounded">
         {/* category */}
         {post.category && (
           <Link
-            href={`/category/${post.category.slug}`}
+            href={`/the-loai/${post.category.slug}`}
             className="category-badge position-absolute"
           >
             {post.category.name}

@@ -2,29 +2,26 @@
 
 import Empty from "@/components/ui/Empty";
 import Pagination from "@/components/ui/Pagination";
-import {
-  getPostBySlugTagPaginate,
-  getPostsBySlugCategoryPaginate,
-} from "@/lib/db/post";
+import { getPostsBySlugCategoryPaginate } from "@/lib/db/post";
 import { handleSubmitWithErrorHandling } from "@/utils/asyncHelpers";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 
-interface TagContainerProps {
-  tagSlug: string;
+interface CategoryContainerProps {
+  categorySlug: string;
 }
 
-const TagContainer = ({ tagSlug }: TagContainerProps) => {
+const CategoryContainer = ({ categorySlug }: CategoryContainerProps) => {
   const [posts, setPosts] = useState<any[]>([]);
   const [total, setTotal] = useState(0);
   const [page, setPage] = useState(1);
 
-  const getPostsByTagSlug = async (page: number) => {
+  const getPostCategoryBySlug = async (page: number) => {
     const res = (await handleSubmitWithErrorHandling(
       () =>
-        getPostBySlugTagPaginate({
-          slug: tagSlug || "",
+        getPostsBySlugCategoryPaginate({
+          slug: categorySlug || "",
           page,
         }),
       (err) => toast.error(err.message)
@@ -37,10 +34,10 @@ const TagContainer = ({ tagSlug }: TagContainerProps) => {
   };
 
   useEffect(() => {
-    if (tagSlug) {
-      getPostsByTagSlug(page);
+    if (categorySlug) {
+      getPostCategoryBySlug(page);
     }
-  }, [tagSlug, page]);
+  }, [categorySlug, page]);
 
   return (
     <>
@@ -105,4 +102,4 @@ const TagContainer = ({ tagSlug }: TagContainerProps) => {
   );
 };
 
-export default TagContainer;
+export default CategoryContainer;
