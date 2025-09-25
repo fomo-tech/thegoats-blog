@@ -143,7 +143,7 @@ export async function getHeroPosts() {
   if (error) throw error;
 
   // Lấy bài featured đầu tiên
-  const featuredPost = data.find((p) => p.is_featured);
+  const featuredPost = data.filter((p) => p.is_featured).slice(0, 4);
 
   // Lấy 4 bài trending (nếu có)
   const popularPosts = data.filter((p) => p.is_trending).slice(0, 4);
@@ -152,8 +152,6 @@ export async function getHeroPosts() {
   const recentPosts = data.slice(0, 4);
 
   const heroPostFirst = data.filter((p) => p.is_featured_hero);
-
-  console.log(111, heroPostFirst);
 
   return {
     featuredPost,

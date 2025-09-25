@@ -64,7 +64,7 @@ export default async function HeroSection() {
 
           {/* Tabs */}
           <div className="md:w-1/3">
-            <PostTabs popularPosts={popularPosts} recentPosts={recentPosts} />
+            <PostTabs featuredPosts={featuredPost} recentPosts={recentPosts} />
           </div>
         </div>
       </div>
