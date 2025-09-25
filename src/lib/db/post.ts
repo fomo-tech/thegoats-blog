@@ -22,6 +22,7 @@ export type Post = {
   likes?: number;
   seo_title?: string | null;
   seo_description?: string | null;
+  is_featured_hero: boolean;
 };
 
 export async function getPostBySearch({
@@ -132,7 +133,7 @@ export async function getHeroPosts() {
     .select(
       `
       id, title, slug, is_featured, is_published, is_trending, cover_image,
-      category:category_id ( name ),
+      category:category_id ( name ),is_featured_hero,
       published_at
     `
     )
@@ -150,7 +151,16 @@ export async function getHeroPosts() {
   // Lấy 4 bài mới nhất
   const recentPosts = data.slice(0, 4);
 
-  return { featuredPost, popularPosts, recentPosts } as const;
+  const heroPostFirst = data.filter((p) => p.is_featured_hero);
+
+  console.log(111, heroPostFirst);
+
+  return {
+    featuredPost,
+    popularPosts,
+    recentPosts,
+    heroPostFirst: heroPostFirst?.[0],
+  } as const;
 }
 
 // lib/db/posts.ts
@@ -501,6 +511,7 @@ export async function createPost(post: {
   isTrending?: boolean;
   seoTitle?: string | null;
   seoDescription?: string | null;
+  is_featured_hero: string;
 }): Promise<Post> {
   const now = new Date().toISOString();
   const slug = generateSlug(post.title);
@@ -522,6 +533,7 @@ export async function createPost(post: {
       author_id: post.authorId,
       published_at: post.isPublished === "published" ? now : null,
       updated_at: now,
+      is_featured_hero: post.is_featured_hero === "is_featured_hero",
     })
     .select()
     .single();
@@ -562,6 +574,7 @@ export async function updatePost(
     is_trending?: boolean;
     seo_title?: string | null;
     seo_description?: string | null;
+    is_featured_hero: boolean;
   }
 ): Promise<Post> {
   const now = new Date().toISOString();
@@ -587,6 +600,7 @@ export async function updatePost(
       slug,
       updated_at: now,
       published_at: updates.isPublished === "published" ? now : null,
+      is_featured_hero: updates.is_featured_hero,
     })
     .eq("id", id)
     .select()

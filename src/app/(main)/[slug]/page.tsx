@@ -5,6 +5,8 @@ import CommentForm from "@/components/ui/CommentForm";
 import ListComment from "@/components/ui/ListComment";
 import { getPostBySlug } from "@/lib/db/post";
 import { mainRoutes } from "@/routes/main";
+import { getReadingTime } from "@/utils/calculateReadingTime";
+
 import { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
@@ -24,6 +26,8 @@ export async function generateMetadata(props: {
     return { title: "Bài viết không tồn tại" };
   }
 
+  console.log(post.content);
+
   return {
     title: post.seo_title || post.title,
     description: post.seo_description?.slice(0, 150) || "",
@@ -37,23 +41,21 @@ export default async function PostSinglePage(props: { params: Params }) {
   if (!post) return notFound();
   if (post.status !== "published") return notFound();
 
+  const minutes = getReadingTime(post.content.blocks);
+
   return (
-    <MainContent
-      breadcrumb={
-        <Breadcrumb
-          items={[
-            { label: "Trang chủ", href: mainRoutes("home") },
-            { label: post.title || "Bài viết", href: "#" },
-          ]}
-        />
-      }
-      slugCategory={post.category?.slug}
-    >
+    <MainContent slugCategory={post.category?.slug}>
+      <Breadcrumb
+        items={[
+          { label: "Trang chủ", href: mainRoutes("home") },
+          { label: post.title || "Bài viết", href: "#" },
+        ]}
+      />
       <div className="post post-single">
         {/* Header bài viết */}
         <div className="post-header">
           <h1 className="title mt-0 mb-3">{post.title}</h1>
-          <ul className="meta list-inline mb-0">
+          <ul className="!pl-0 meta flex items-center mb-0">
             <li className="list-inline-item !flex items-center gap-1">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -71,6 +73,23 @@ export default async function PostSinglePage(props: { params: Params }) {
               </svg>
 
               {post.created_at?.toString().slice(0, 10)}
+            </li>
+            <li className="list-inline-item !flex items-center gap-1">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth={1.5}
+                stroke="currentColor"
+                className="size-4"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
+                />
+              </svg>
+              {minutes} phút đọc
             </li>
           </ul>
         </div>

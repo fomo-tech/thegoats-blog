@@ -713,13 +713,13 @@ body.down .header-classic .header-bottom.clone {
 }
 
 .navbar-nav {
-  font-family: "Source Sans 3", sans-serif;
+  font-family: "Lora", serif;
   font-size: 16px;
 }
 .navbar-nav .nav-link {
   padding: 0.439rem 1rem;
   color: #373a3a;
-  font-weight: 500;
+  font-weight: 700;
 }
 .navbar-nav .nav-link:hover {
   color: #fe4f70;
@@ -1239,6 +1239,11 @@ section {
 }
 .post .post-title a {
   color: #252525;
+  display: -webkit-box;
+  -webkit-line-clamp: 3; /* số dòng muốn hiển thị */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 .post .post-title a:hover {
   color: #fe4f70;
@@ -1258,7 +1263,7 @@ section {
 }
 .post .meta a {
   color: #212529;
-  font-weight: 400;
+  font-weight: 700;
 }
 .post .meta a:hover {
   color: #fe4f70;
@@ -1732,7 +1737,7 @@ section {
   color: #fff;
 }
 .featured-post-lg .meta {
-  color: rgba(255, 255, 255, 0.6);
+  color: rgba(255, 255, 255, 0.9);
 }
 .featured-post-lg .meta li:after {
   content: "";
@@ -1744,7 +1749,7 @@ section {
 .featured-post-lg .thumb .inner {
   background-size: cover;
   background-position: center center;
-  height: 533px;
+  height: 100%;
   -webkit-transition: all 0.3s ease-in-out;
   -moz-transition: all 0.3s ease-in-out;
   transition: all 0.3s ease-in-out;

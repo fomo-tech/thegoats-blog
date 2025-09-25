@@ -3,30 +3,31 @@ import Link from "next/link";
 import PostTabs from "../PostTabs";
 
 export default async function HeroSection() {
-  const { featuredPost, popularPosts, recentPosts } =
+  const { heroPostFirst, featuredPost, popularPosts, recentPosts } =
     (await getHeroPosts()) as any;
 
-  if (!featuredPost || !popularPosts || !recentPosts) return null;
+  if (!featuredPost || !popularPosts || !recentPosts || !heroPostFirst)
+    return null;
 
   return (
     <section id="hero">
-      <div className="mx-auto px-4 container-xl">
+      <div className="mx-auto px-4 max-w-[1280px] mx-auto">
         <div className="flex flex-col md:flex-row gap-6">
           {/* Featured post */}
           <div className="md:w-2/3">
-            <div className="post featured-post-lg">
+            <div className="post featured-post-lg h-full">
               <div className="details clearfix">
                 <div className="category-badge">
-                  {featuredPost.category?.name}
+                  {heroPostFirst.category?.name}
                 </div>
                 <h2 className="post-title">
-                  <Link href={`/${featuredPost.slug}`}>
-                    {featuredPost.title}
+                  <Link href={`/${heroPostFirst.slug}`}>
+                    {heroPostFirst.title}
                   </Link>
                 </h2>
                 <ul className="meta list-inline mb-0">
                   {/* <li className="list-inline-item">
-                    {featuredPost.author?.name}
+                    {heroPostFirst.author?.name}
                   </li> */}
                   <li className="list-inline-item !flex !items-center gap-1">
                     <svg
@@ -44,16 +45,16 @@ export default async function HeroSection() {
                       />
                     </svg>
 
-                    {new Date(featuredPost?.published_at).toLocaleString()}
+                    {new Date(heroPostFirst?.published_at).toLocaleString()}
                   </li>
                 </ul>
               </div>
-              <Link href={`/${featuredPost.slug}`}>
-                <div className="thumb rounded">
+              <Link href={`/${heroPostFirst.slug}`}>
+                <div className="thumb rounded h-full">
                   <div
                     className="inner data-bg-image"
                     style={{
-                      backgroundImage: `url('${featuredPost?.cover_image}')`,
+                      backgroundImage: `url('${heroPostFirst?.cover_image}')`,
                     }}
                   ></div>
                 </div>
