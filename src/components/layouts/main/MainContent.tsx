@@ -21,7 +21,7 @@ const MainContent = ({
           <div className="col-lg-8">{children}</div>
           <div className="col-lg-4">
             {/* sidebar */}
-            <div className="sidebar">
+            <div className="sidebar sticky top-0">
               <SidebarWidget
                 slugCategory={slugCategory}
                 tagCategrory={tagCategrory}

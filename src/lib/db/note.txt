@@ -1,6 +1,29 @@
-import { generateSlug } from "@/utils";
 import { supabase } from "../supabaseClient";
-import { Post, PostFilters } from "@/types/post";
+
+export type Post = {
+  id: string;
+  title: string;
+  slug: string;
+  excerpt: string | null;
+  content: any;
+  cover_image?: string | null;
+  author_id?: string | null;
+  status: "draft" | "published" | "archived";
+  published_at?: string | null;
+  created_at: string;
+  updated_at: string;
+  category_id: string;
+  tags: string[]; // danh sách tag ID
+  is_published: boolean;
+  // ➕ Các trường mới
+  is_featured?: boolean;
+  is_trending?: boolean;
+  views?: number;
+  likes?: number;
+  seo_title?: string | null;
+  seo_description?: string | null;
+  is_featured_hero: boolean;
+};
 
 export async function getPostBySearch({
   keyword,
@@ -425,6 +448,14 @@ export async function getPostBySlug(slug: string): Promise<any | null> {
 }
 
 // Tạo slug từ title
+function generateSlug(title: string): string {
+  return title
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "") // bỏ dấu tiếng Việt
+    .replace(/[^a-z0-9]+/g, "-") // thay space/ký tự lạ bằng -
+    .replace(/(^-|-$)+/g, ""); // xóa - đầu/cuối
+}
 
 // ✅ Lấy tất cả bài viết
 export async function getAllPosts(): Promise<Post[]> {

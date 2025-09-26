@@ -1,5 +1,5 @@
 import MainContent from "@/components/layouts/main/MainContent";
-import FeaturedPosts from "@/components/sections/FeaturedPosts";
+import PopularPosts from "@/components/sections/PopularPosts";
 import HeroSection from "@/components/sections/HeroSection";
 import LatestPost from "@/components/sections/LatestPost";
 import TrendingPosts from "@/components/sections/TrendingPosts";
@@ -11,7 +11,7 @@ const HomePage = () => {
       <HeroSection />
       <MainContent>
         {/* section header */}
-        <FeaturedPosts />
+        <PopularPosts />
         <div
           className="spacer"
           style={{

@@ -28,7 +28,13 @@ const PostListItem: React.FC<PostListItemProps> = ({
   // Format the date for display
 
   return (
-    <div key={post.id} className="post post-list-sm circle h-[110px]">
+    <div
+      key={post.id}
+      className="post post-list-sm circle"
+      style={{
+        height: "95px",
+      }}
+    >
       <div className="thumb circle">
         {isShowNum && <span className="number">{index + 1}</span>}
 
