@@ -6,6 +6,12 @@ import SeachPopup from "../SeachPopup";
 import { usePathname } from "next/navigation";
 import logo from "@/assets/images/logo.png";
 import Image from "next/image";
+import { useGlobalStore } from "@/store/useGlobalStore";
+import { SettingMap } from "@/types/setting";
+
+interface MainHeaderProps {
+  settings: SettingMap;
+}
 const menuItems = [
   {
     label: "Tin tức",
@@ -39,16 +45,9 @@ const menuItems = [
   // { label: "Liên hệ", href: "/contact" },
 ];
 
-const socialIcons = [
-  "facebook-f",
-  "twitter",
-  "instagram",
-  "pinterest",
-  "medium",
-  "youtube",
-];
+const socialIcons = ["facebook-f", "twitter", "instagram", "tiktok", "youtube"];
 
-export default function MainHeader() {
+export default function MainHeader({ settings }: MainHeaderProps) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [openSubmenus, setOpenSubmenus] = useState({});
   const [searchOpen, setSearchOpen] = useState(false);
@@ -123,7 +122,12 @@ export default function MainHeader() {
         <div className="container">
           {/* Logo */}
           <Link className="navbar-brand" href="/">
-            <Image width={200} height={70} alt="Logo crypto fomos" src={logo} />
+            <Image
+              width={200}
+              height={70}
+              alt="Logo crypto fomos"
+              src={settings?.LOGO || logo}
+            />
           </Link>
 
           <div className="bs-collapse navbar-collapse">{renderMenu(false)}</div>

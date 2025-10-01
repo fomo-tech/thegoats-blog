@@ -1,19 +1,26 @@
 import React from "react";
 import logo from "@/assets/images/logo.png";
 import Image from "next/image";
-const Footer = () => {
+import { SettingMap } from "@/types/setting";
+
+interface MainFooterProps {
+  settings: SettingMap;
+}
+const Footer = ({ settings }: MainFooterProps) => {
   return (
     <footer className="bg-gray-800 text-gray-400 font-sans py-12 px-4 border-t-4 border-yellow-500">
       <div className="container mx-auto flex flex-col lg:flex-row items-start lg:items-center justify-between gap-8 lg:gap-16">
         {/* About Section */}
         <div className="max-w-md lg:w-1/4 flex-shrink-0">
           <div className="flex items-center space-x-2 mb-4">
-            <Image width={200} height={70} alt="Logo crypto fomos" src={logo} />
+            <Image
+              width={200}
+              height={70}
+              alt="Logo crypto fomos"
+              src={settings.LOGO || logo}
+            />
           </div>
-          <p className="text-sm leading-relaxed">
-            Tin tức và phân tích về tiền điện tử và chuỗi khối - Altcoin,
-            Bitcoin, FinTech, quy định, NFT và mọi thứ từ thế giới tiền điện tử.
-          </p>
+          <p className="text-sm leading-relaxed">{settings.FOOTER_DES}</p>
         </div>
 
         {/* Navigation Sections */}

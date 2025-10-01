@@ -136,22 +136,13 @@ export default async function PostSinglePage(props: { params: Params }) {
                 </li>
                 <li className="list-inline-item">
                   <a href="blog-single.html#">
-                    <i className="fab fa-linkedin-in" />
+                    <i className="fab fa-tiktok" />
                   </a>
                 </li>
-                <li className="list-inline-item">
-                  <a href="blog-single.html#">
-                    <i className="fab fa-pinterest" />
-                  </a>
-                </li>
+
                 <li className="list-inline-item">
                   <a href="blog-single.html#">
                     <i className="fab fa-telegram-plane" />
-                  </a>
-                </li>
-                <li className="list-inline-item">
-                  <a href="blog-single.html#">
-                    <i className="far fa-envelope" />
                   </a>
                 </li>
               </ul>

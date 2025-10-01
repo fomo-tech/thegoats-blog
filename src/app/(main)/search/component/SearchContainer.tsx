@@ -2,7 +2,7 @@
 
 import PostCard from "@/components/post/PostCard";
 import Pagination from "@/components/ui/Pagination";
-import { getPostBySearch, Post } from "@/lib/db/post";
+import { getPostBySearch } from "@/lib/db/post";
 import { handleSubmitWithErrorHandling } from "@/utils/asyncHelpers";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";

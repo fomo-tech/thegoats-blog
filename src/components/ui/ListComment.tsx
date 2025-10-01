@@ -61,6 +61,8 @@ const ListComment = ({ postId }: ListCommentProps) => {
   useEffect(() => {
     if (postId) getComments(postId);
   }, [postId, isCallBaclListComment]);
+
+  if (!listComment.length) return "Chưa có bình luận";
   return (
     <div className="comments bordered padding-30 rounded">
       <ul className="comments">

@@ -1,5 +1,6 @@
 "use client";
 
+import PostCard from "@/components/post/PostCard";
 import Empty from "@/components/ui/Empty";
 import Pagination from "@/components/ui/Pagination";
 import { getPostsBySlugCategoryPaginate } from "@/lib/db/post";
@@ -47,46 +48,7 @@ const CategoryContainer = ({ categorySlug }: CategoryContainerProps) => {
         {posts.map((post) => (
           <div className="col-sm-6" key={post.id}>
             {/* post */}
-            <div className="post post-grid rounded bordered">
-              <div className="thumb top-rounded">
-                <Link
-                  href={`/the-loai/${post.category?.slug}`}
-                  className="category-badge position-absolute"
-                >
-                  {post.category?.name || "Category"}
-                </Link>
-                {post?.cover_image && (
-                  <Link href={`/${post?.slug}`}>
-                    <div className="inner">
-                      <img src={post?.cover_image} alt={post?.title} />
-                    </div>
-                  </Link>
-                )}
-              </div>
-              <div className="details">
-                <ul className="meta list-inline mb-0">
-                  <li className="list-inline-item">
-                    <a href="#">
-                      {post.author?.avatar && (
-                        <img
-                          src={post.author.avatar}
-                          className="author"
-                          alt={post.author.name}
-                        />
-                      )}
-                      {post.author?.name || "Unknown"}
-                    </a>
-                  </li>
-                  <li className="list-inline-item">
-                    {new Date(post.created_at).toLocaleDateString()}
-                  </li>
-                </ul>
-                <h5 className="post-title mb-3 mt-3">
-                  <Link href={`/${post.slug}`}>{post.title}</Link>
-                </h5>
-                <p className="excerpt mb-0">{post.excerpt}</p>
-              </div>
-            </div>
+            <PostCard post={post} />
           </div>
         ))}
       </div>

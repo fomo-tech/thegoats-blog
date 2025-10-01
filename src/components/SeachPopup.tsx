@@ -17,8 +17,8 @@ const SeachPopup: React.FC<SeachPopupProps> = ({ isOpen, onClose }) => {
     const formData = new FormData(e.currentTarget);
     const query = formData.get("q") as string;
     if (query) router.push(`/search?q=${encodeURIComponent(query)}`);
-    onClose();
     e.currentTarget.reset();
+    onClose();
   };
 
   // ESC key close

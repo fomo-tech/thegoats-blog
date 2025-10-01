@@ -48,6 +48,10 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+.hide-scrollbar::-webkit-scrollbar {
+  display: none; /* Chrome, Safari */
+}
+
 img {
   max-width: 100%;
   height: auto;

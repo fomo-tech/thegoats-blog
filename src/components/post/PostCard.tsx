@@ -49,7 +49,7 @@ const PostCard: React.FC<PostCardProps> = ({ post }) => {
       <div className="details">
         <ul className="meta list-inline mb-0">
           {/* author */}
-          <li className="list-inline-item">
+          {/* <li className="list-inline-item">
             <a href="#">
               {post.author?.avatar && (
                 <img
@@ -60,9 +60,24 @@ const PostCard: React.FC<PostCardProps> = ({ post }) => {
               )}
               {post.author?.name || "Unknown"}
             </a>
-          </li>
+          </li> */}
           {/* created date */}
-          <li className="list-inline-item">
+          <li className="list-inline-item !flex items-center gap-1">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              strokeWidth={1.5}
+              stroke="currentColor"
+              className="size-3"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 0 1 2.25-2.25h13.5A2.25 2.25 0 0 1 21 7.5v11.25m-18 0A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75m-18 0v-7.5A2.25 2.25 0 0 1 5.25 9h13.5A2.25 2.25 0 0 1 21 11.25v7.5"
+              />
+            </svg>
+
             {new Date(post.created_at).toLocaleDateString()}
           </li>
         </ul>
@@ -73,7 +88,9 @@ const PostCard: React.FC<PostCardProps> = ({ post }) => {
         </h5>
 
         {/* excerpt */}
-        {post.excerpt && <p className="excerpt mb-0">{post.excerpt}</p>}
+        {post.excerpt && (
+          <p className="excerpt mb-0 line-clamp-3">{post.excerpt}</p>
+        )}
       </div>
     </div>
   );

@@ -26,7 +26,7 @@ const CategoriesPost = async ({ currentSlug }: CategoriesPostProps) => {
       {/* widget categories */}
       <div className="widget rounded">
         <div className="widget-header text-center">
-          <h3 className="widget-title">Khám phá thể loại khác</h3>
+          <h3 className="widget-title">Thể loại</h3>
         </div>
         <div className="widget-content">
           <ul className="list">
