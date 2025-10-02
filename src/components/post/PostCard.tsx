@@ -2,6 +2,7 @@
 
 import React from "react";
 import Link from "next/link";
+import Image from "next/image";
 
 interface PostCardProps {
   post: {
@@ -23,8 +24,8 @@ interface PostCardProps {
 
 const PostCard: React.FC<PostCardProps> = ({ post }) => {
   return (
-    <div className="post post-grid rounded bordered h-full">
-      <div className="thumb top-rounded">
+    <div className="post post-grid rounded  overflow-hidden bordered h-full">
+      <div className="thumb top-rounded ">
         {/* category */}
         {post.category && (
           <Link
@@ -38,8 +39,13 @@ const PostCard: React.FC<PostCardProps> = ({ post }) => {
         {/* cover image */}
         {post.cover_image && (
           <Link href={`/${post.slug}`}>
-            <div className="inner">
-              <img src={post.cover_image} alt={post.title} />
+            <div className="inner w-[500px] h-[250px] ">
+              <Image
+                fill
+                className="w-full h-full "
+                src={post.cover_image}
+                alt={post.title}
+              />
             </div>
           </Link>
         )}

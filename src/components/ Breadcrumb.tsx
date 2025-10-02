@@ -1,4 +1,5 @@
 import clsx from "clsx";
+import Link from "next/link";
 import React from "react";
 
 type BreadcrumbItem = {
@@ -25,7 +26,7 @@ const Breadcrumb: React.FC<BreadcrumbProps> = ({ items }) => {
               aria-current={isLast ? "page" : undefined}
             >
               {!isLast && item.href ? (
-                <a href={item.href}>{item.label}</a>
+                <Link href={item.href}>{item.label}</Link>
               ) : (
                 item.label
               )}

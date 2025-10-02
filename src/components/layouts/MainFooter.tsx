@@ -2,6 +2,7 @@ import React from "react";
 import logo from "@/assets/images/logo.png";
 import Image from "next/image";
 import { SettingMap } from "@/types/setting";
+import { socialIcons } from "./MainHeader";
 
 interface MainFooterProps {
   settings: SettingMap;
@@ -27,41 +28,41 @@ const Footer = ({ settings }: MainFooterProps) => {
         <div className="flex flex-1 flex-wrap gap-8 md:gap-12 lg:gap-16 justify-between">
           <div className="flex flex-col space-y-3">
             <h3 className="text-lg font-semibold text-white mb-2">Sự bí ẩn</h3>
-            <a href="#" className="hover:text-white transition-colors">
+            <a href="#" className="text-[#ffff] transition-colors">
               Chính sách bảo mật
             </a>
-            <a href="#" className="hover:text-white transition-colors">
+            <a href="#" className="text-[#ffff] transition-colors">
               Hướng dẫn biên tập
             </a>
-            <a href="#" className="hover:text-white transition-colors">
+            <a href="#" className="text-[#ffff] transition-colors">
               Về chúng tôi
             </a>
-            <a href="#" className="hover:text-white transition-colors">
+            <a href="#" className="text-[#ffff] transition-colors">
               Miễn trừ trách nhiệm
             </a>
-            <a href="#" className="hover:text-white transition-colors">
+            <a href="#" className="text-[#ffff] transition-colors">
               Đánh Giá Dự Án
             </a>
           </div>
 
           <div className="flex flex-col space-y-3">
             <h3 className="text-lg font-semibold text-white mb-2">Thông tin</h3>
-            <a href="#" className="hover:text-white transition-colors">
+            <a href="#" className="text-[#ffff] transition-colors">
               Thông cáo báo chí
             </a>
-            <a href="#" className="hover:text-white transition-colors">
+            <a href="#" className="text-[#ffff] transition-colors">
               Công nghệ tài chính
             </a>
-            <a href="#" className="hover:text-white transition-colors">
+            <a href="#" className="text-[#ffff] transition-colors">
               Quy định pháp lý
             </a>
-            <a href="#" className="hover:text-white transition-colors">
+            <a href="#" className="text-[#ffff] transition-colors">
               Altcoin
             </a>
-            <a href="#" className="hover:text-white transition-colors">
+            <a href="#" className="text-[#ffff] transition-colors">
               Bitcoin
             </a>
-            <a href="#" className="hover:text-white transition-colors">
+            <a href="#" className="text-[#ffff] transition-colors">
               Blockchain
             </a>
           </div>
@@ -70,21 +71,24 @@ const Footer = ({ settings }: MainFooterProps) => {
         {/* Social Media and Copyright */}
         <div className="flex flex-col items-center lg:items-end space-y-4 pt-8 lg:pt-0 border-t border-gray-700 lg:border-t-0 lg:border-l lg:pl-16">
           <div className="flex space-x-6 text-gray-500">
-            <a href="#" className="hover:text-white transition-colors">
-              <i className="fab fa-facebook-f"></i>
-            </a>
-            <a href="#" className="hover:text-white transition-colors">
-              <i className="fab fa-telegram-plane"></i>
-            </a>
-            <a href="#" className="hover:text-white transition-colors">
-              <i className="fab fa-twitter"></i>
-            </a>
-            <a href="#" className="hover:text-white transition-colors">
-              <i className="fab fa-instagram"></i>
-            </a>
-            <a href="#" className="hover:text-white transition-colors">
-              <i className="fab fa-tiktok"></i>
-            </a>
+            {Object.keys(socialIcons).map((key, idx) => {
+              if (typeof settings[key] !== "undefined")
+                return (
+                  <li className="list-inline-item" key={idx}>
+                    <a
+                      href={settings[key]}
+                      target="_blank"
+                      className="!hover:text-white"
+                    >
+                      <i
+                        className={`fab fa-${
+                          socialIcons[key as keyof typeof socialIcons]
+                        }`}
+                      />
+                    </a>
+                  </li>
+                );
+            })}
           </div>
           <p className="text-sm text-[#fff] mt-4">&copy; 2025 Cryptofomo</p>
         </div>

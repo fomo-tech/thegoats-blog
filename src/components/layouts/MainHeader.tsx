@@ -45,7 +45,14 @@ const menuItems = [
   // { label: "Liên hệ", href: "/contact" },
 ];
 
-const socialIcons = ["facebook-f", "twitter", "instagram", "tiktok", "youtube"];
+export const socialIcons = {
+  FACEBOOK: "facebook-f",
+  // "x-twitter",
+  TELE: "telegram",
+  INSTAGRAM: "instagram",
+  TIKTOK: "tiktok",
+  YOUTUBE: "youtube",
+};
 
 export default function MainHeader({ settings }: MainHeaderProps) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -119,7 +126,7 @@ export default function MainHeader({ settings }: MainHeaderProps) {
       <SeachPopup isOpen={searchOpen} onClose={() => setSearchOpen(false)} />
       {/* Navbar */}
       <nav className="navbar navbar-expand-lg">
-        <div className="container">
+        <div className="container !max-w-[1280px]">
           {/* Logo */}
           <Link className="navbar-brand" href="/">
             <Image
@@ -135,13 +142,20 @@ export default function MainHeader({ settings }: MainHeaderProps) {
           {/* Header right */}
           <div className="header-right">
             <ul className="social-icons list-unstyled list-inline mb-0">
-              {socialIcons.map((icon) => (
-                <li className="list-inline-item" key={icon}>
-                  <a href="#">
-                    <i className={`fab fa-${icon}`} />
-                  </a>
-                </li>
-              ))}
+              {Object.keys(socialIcons).map((key, idx) => {
+                if (typeof settings[key] !== "undefined")
+                  return (
+                    <li className="list-inline-item" key={idx}>
+                      <a href={settings[key]} target="_blank">
+                        <i
+                          className={`fab fa-${
+                            socialIcons[key as keyof typeof socialIcons]
+                          }`}
+                        />
+                      </a>
+                    </li>
+                  );
+              })}
             </ul>
             <div className="header-buttons">
               <button
@@ -173,18 +187,30 @@ export default function MainHeader({ settings }: MainHeaderProps) {
           aria-label="Close"
           onClick={toggleMobileMenu}
         />
-        <div className="logo">
-          <img src="images/logo.svg" alt="Katen" />
+        <div className="logo my-0">
+          <Image
+            width={200}
+            height={70}
+            alt="Logo crypto fomos"
+            src={settings?.LOGO || logo}
+          />
         </div>
         <nav>{renderMenu(true)}</nav>
         <ul className="social-icons list-unstyled list-inline mb-0 mt-auto w-100">
-          {socialIcons.map((icon) => (
-            <li className="list-inline-item" key={icon}>
-              <a href="#">
-                <i className={`fab fa-${icon}`} />
-              </a>
-            </li>
-          ))}
+          {Object.keys(socialIcons).map((key, idx) => {
+            if (typeof settings[key] !== "undefined")
+              return (
+                <li className="list-inline-item" key={idx}>
+                  <a href={settings[key]} target="_blank">
+                    <i
+                      className={`fab fa-${
+                        socialIcons[key as keyof typeof socialIcons]
+                      }`}
+                    />
+                  </a>
+                </li>
+              );
+          })}
         </ul>
       </div>
     </header>

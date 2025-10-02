@@ -16,7 +16,7 @@ const PopularPosts = async () => {
 
   return (
     <>
-      <div className="section-header">
+      <div className="section-header flex justify-between items-center">
         <h3 className="section-title">Bài viết phổ biến</h3>
       </div>
       <div className="padding-30 rounded bordered">
@@ -25,12 +25,12 @@ const PopularPosts = async () => {
           <div className="col-sm-6">
             <div className="post">
               <div className="thumb rounded">
-                <a
+                <Link
                   href={`/the-loai/${firstPost.category?.slug}`}
                   className="category-badge position-absolute"
                 >
                   {firstPost?.category?.name}
-                </a>
+                </Link>
                 <Link href={`/${firstPost.slug}`}>
                   <div className="inner">
                     <img
@@ -71,7 +71,7 @@ const PopularPosts = async () => {
                 </li>
               </ul>
               <h5 className="post-title mb-3 mt-3">
-                <a href={`/${firstPost.slug}`}>{firstPost.title}</a>
+                <Link href={`/${firstPost.slug}`}>{firstPost.title}</Link>
               </h5>
               <p className="excerpt mb-0">{firstPost.excerpt}</p>
             </div>

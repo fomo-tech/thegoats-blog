@@ -1,7 +1,5 @@
-import Breadcrumb from "@/components/ Breadcrumb";
 import MainContent from "@/components/layouts/main/MainContent";
 import PageHeader from "@/components/ui/PageHeader";
-import { mainRoutes } from "@/routes/main";
 import React from "react";
 import SearchContainer from "./component/SearchContainer";
 import { SearchParams } from "@/types";

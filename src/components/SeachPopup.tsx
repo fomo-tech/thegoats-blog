@@ -1,7 +1,7 @@
 "use client";
 
 import clsx from "clsx";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import React, { useEffect } from "react";
 
 interface SeachPopupProps {
@@ -11,14 +11,16 @@ interface SeachPopupProps {
 
 const SeachPopup: React.FC<SeachPopupProps> = ({ isOpen, onClose }) => {
   const router = useRouter();
+  const pathname = usePathname();
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    onClose();
     const formData = new FormData(e.currentTarget);
     const query = formData.get("q") as string;
-    if (query) router.push(`/search?q=${encodeURIComponent(query)}`);
+    if (query)
+      router.push(`/search?q=${encodeURIComponent(query)}`, { scroll: true });
     e.currentTarget.reset();
-    onClose();
   };
 
   // ESC key close

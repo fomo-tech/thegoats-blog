@@ -1,6 +1,7 @@
 "use client";
 
 import PostCard from "@/components/post/PostCard";
+import Empty from "@/components/ui/Empty";
 import Pagination from "@/components/ui/Pagination";
 import { getPostBySearch } from "@/lib/db/post";
 import { handleSubmitWithErrorHandling } from "@/utils/asyncHelpers";
@@ -42,9 +43,7 @@ const SearchContainer = ({ query }: SearchContainerProps) => {
   return (
     <div>
       <div className="row gy-4">
-        {posts.length === 0 && (
-          <p className="text-center w-full">No posts found.</p>
-        )}
+        {posts.length === 0 && <Empty />}
 
         {posts.map((post) => (
           <div className="col-sm-6" key={post.id}>

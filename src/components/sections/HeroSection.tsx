@@ -11,7 +11,7 @@ export default async function HeroSection() {
 
   return (
     <section id="hero">
-      <div className="mx-auto px-4 max-w-[1280px] mx-auto">
+      <div className="mx-auto  max-w-[1280px] ">
         <div className="flex flex-col md:flex-row gap-6">
           {/* Featured post */}
           <div className="md:w-2/3">
