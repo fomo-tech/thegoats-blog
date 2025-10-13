@@ -18,7 +18,7 @@ const TagsPost = async ({ tagCategrory }: TagsPostProps) => {
   const shuffled = [...filtered].sort(() => Math.random() - 0.5);
 
   // Lấy 5 cái random
-  const randomCategories = shuffled.slice(0, 5);
+  const randomCategories = shuffled.slice(0, 10);
 
   return (
     <>
@@ -27,15 +27,12 @@ const TagsPost = async ({ tagCategrory }: TagsPostProps) => {
         <div className="widget-header text-center">
           <h3 className="widget-title">Thẻ bài viết</h3>
         </div>
-        <div className="widget-content">
-          {/* Render each tag */}
-          <ul className="list">
-            {randomCategories.map((tag) => (
-              <li key={tag.id}>
-                <Link href={`/tag/${tag.slug}`}>#{tag.name}</Link>
-              </li>
-            ))}
-          </ul>
+        <div className="widget-content gap-1 flex items-center flex-wrap">
+          {randomCategories.map((tag) => (
+            <Link href={`/tag/${tag.slug}`} className="tag" key={tag?.id}>
+              #{tag?.name}
+            </Link>
+          ))}
         </div>
       </div>
     </>

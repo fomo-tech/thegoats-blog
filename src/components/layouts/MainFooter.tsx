@@ -7,6 +7,7 @@ import { socialIcons } from "./MainHeader";
 interface MainFooterProps {
   settings: SettingMap;
 }
+
 const Footer = ({ settings }: MainFooterProps) => {
   return (
     <footer className="bg-gray-800 text-gray-400 font-sans py-12 px-4 border-t-4 border-yellow-500">
