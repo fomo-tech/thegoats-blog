@@ -10,7 +10,7 @@ interface MainFooterProps {
 
 const Footer = ({ settings }: MainFooterProps) => {
   return (
-    <footer className="bg-gray-800 text-gray-400 font-sans py-12 px-4 border-t-4 border-yellow-500">
+    <footer className="bg-gray-700 text-gray-400 font-sans py-12 px-4 border-t-4 border-[#fe4f70]">
       <div className="container mx-auto flex flex-col lg:flex-row items-start lg:items-center justify-between gap-8 lg:gap-16">
         {/* About Section */}
         <div className="max-w-md lg:w-1/4 flex-shrink-0">
@@ -29,41 +29,41 @@ const Footer = ({ settings }: MainFooterProps) => {
         <div className="flex flex-1 flex-wrap gap-8 md:gap-12 lg:gap-16 justify-between">
           <div className="flex flex-col space-y-3">
             <h3 className="text-lg font-semibold text-white mb-2">Sự bí ẩn</h3>
-            <a href="#" className="text-[#ffff] transition-colors">
+            <a href="#" className="!text-gray-400 transition-colors">
               Chính sách bảo mật
             </a>
-            <a href="#" className="text-[#ffff] transition-colors">
+            <a href="#" className="!text-gray-400 transition-colors">
               Hướng dẫn biên tập
             </a>
-            <a href="#" className="text-[#ffff] transition-colors">
+            <a href="#" className="!text-gray-400 transition-colors">
               Về chúng tôi
             </a>
-            <a href="#" className="text-[#ffff] transition-colors">
+            <a href="#" className="!text-gray-400 transition-colors">
               Miễn trừ trách nhiệm
             </a>
-            <a href="#" className="text-[#ffff] transition-colors">
+            <a href="#" className="!text-gray-400 transition-colors">
               Đánh Giá Dự Án
             </a>
           </div>
 
           <div className="flex flex-col space-y-3">
             <h3 className="text-lg font-semibold text-white mb-2">Thông tin</h3>
-            <a href="#" className="text-[#ffff] transition-colors">
+            <a href="#" className="!text-gray-400 transition-colors">
               Thông cáo báo chí
             </a>
-            <a href="#" className="text-[#ffff] transition-colors">
+            <a href="#" className="!text-gray-400 transition-colors">
               Công nghệ tài chính
             </a>
-            <a href="#" className="text-[#ffff] transition-colors">
+            <a href="#" className="!text-gray-400 transition-colors">
               Quy định pháp lý
             </a>
-            <a href="#" className="text-[#ffff] transition-colors">
+            <a href="#" className="!text-gray-400 transition-colors">
               Altcoin
             </a>
-            <a href="#" className="text-[#ffff] transition-colors">
+            <a href="#" className="!text-gray-400 transition-colors">
               Bitcoin
             </a>
-            <a href="#" className="text-[#ffff] transition-colors">
+            <a href="#" className="!text-gray-400 transition-colors">
               Blockchain
             </a>
           </div>
@@ -79,7 +79,7 @@ const Footer = ({ settings }: MainFooterProps) => {
                     <a
                       href={settings[key]}
                       target="_blank"
-                      className="!hover:text-white"
+                      className="!hover:text-white !text-[#ffffff]"
                     >
                       <i
                         className={`fab fa-${
@@ -91,7 +91,7 @@ const Footer = ({ settings }: MainFooterProps) => {
                 );
             })}
           </div>
-          <p className="text-sm text-[#fff] mt-4">&copy; 2025 Cryptofomo</p>
+          <p className="text-sm !text-[#fff] mt-4">&copy; 2025 Cryptofomo</p>
         </div>
       </div>
     </footer>

@@ -91,8 +91,11 @@ const TrendingPosts = async () => {
 
   return (
     <>
-      <div className="section-header">
-        <h3 className="section-title">Xu hướng hôm nay</h3>
+      <div className="section-header flex justify-between items-center">
+        <h3 className="section-title ">Xu hướng hôm nay</h3>
+        <Link href={"/xu-huong"}>
+          <h3 className="section-title !text-[14px] underline">Xem thêm</h3>
+        </Link>
       </div>
       <div className="padding-30 rounded bordered">
         <div className="row gy-5">

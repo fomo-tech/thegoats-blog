@@ -43,7 +43,8 @@ export async function getPopularPosts({
       id, title, slug, cover_image, views, is_trending, is_featured, excerpt,
       category:category_id ( id, name, slug ),
       tags:post_tags ( tag:tag_id ( id, name, slug ) ),
-      published_at
+      published_at,
+      content
     `,
       { count: "exact" }
     )
@@ -69,6 +70,7 @@ export async function getPopularPosts({
       excerpt: item.excerpt,
       published_at: item.published_at,
       category: item.category ?? null,
+      content: item.content,
       tags: item.tags?.map((t: any) => t.tag) ?? [],
     })) ?? null;
 

@@ -1,3 +1,33 @@
+export interface EditorData {
+  time: number;
+  version: string;
+  blocks: EditorBlock[];
+}
+
+export interface EditorBlock {
+  id: string;
+  type: string;
+  data: BlockData;
+}
+
+export type BlockData = ParagraphData | ListData | Record<string, any>; // fallback cho các loại block khác nếu có
+
+export interface ParagraphData {
+  text: string;
+}
+
+export interface ListData {
+  style: "unordered" | "ordered";
+  items: ListItem[];
+  meta?: Record<string, any>;
+}
+
+export interface ListItem {
+  content: string;
+  items: ListItem[];
+  meta?: Record<string, any>;
+}
+
 export type Post = {
   id: string;
   title: string;
@@ -37,6 +67,7 @@ export type PostQueryOptions = {
 
 export type PostListItem = {
   id: string;
+  content?: EditorData;
   title: string;
   excerpt?: string;
   slug: string;

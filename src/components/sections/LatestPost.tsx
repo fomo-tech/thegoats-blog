@@ -1,4 +1,3 @@
-import { getPostLists } from "@/lib/db/post";
 import { getLatestPosts } from "@/services/post";
 import Link from "next/link";
 import React from "react";

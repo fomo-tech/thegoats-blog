@@ -35,7 +35,7 @@ const MainLayout = ({ children, settings }: Props) => {
 
         <CoinGeckoMarquee />
         {/* Main content */}
-        <main className="flex-1 mx-auto px-4 py-6">{children}</main>
+        <main className="flex-1 mx-auto px-3 md:px-4 py-6">{children}</main>
 
         {/* Footer */}
         <MainFooter settings={settings} />
