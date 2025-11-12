@@ -73,10 +73,7 @@ const TrendingPageContainer = () => {
                         </Link>
                       </li>
                       <li className="list-inline-item">
-                        {format(
-                          new Date(post.published_at),
-                          "dd/MM/yyyy HH:mm"
-                        )}
+                        {format(new Date(post.published_at), "dd/MM/yyyy")}
                       </li>
                     </ul>
                     <h5 className="post-title">

@@ -48,7 +48,7 @@ export default async function PostSinglePage(props: { params: Params }) {
     <MainContent slugCategory={post.category?.slug}>
       <Breadcrumb
         items={[
-          { label: "Trang chủ", href: mainRoutes("home") },
+          { label: "Trang chủ", href: mainRoutes("Trang chủ") },
           { label: post.title || "Bài viết", href: "#" },
         ]}
       />

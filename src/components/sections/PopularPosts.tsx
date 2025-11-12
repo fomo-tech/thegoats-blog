@@ -44,9 +44,9 @@ const PopularPosts = async () => {
                   </div>
                 </Link>
               </div>
-              <ul className="meta list-inline mt-4 mb-0">
+              <ul className="flex items-center gap-1 !pl-0 mt-4 mb-0">
                 <li className="list-inline-item">
-                  <div className="flex items-center gap-1">
+                  <div className="flex items-center gap-1 text-[12px]">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       fill="none"
@@ -62,13 +62,10 @@ const PopularPosts = async () => {
                       />
                     </svg>
 
-                    {format(
-                      new Date(firstPost.published_at),
-                      "dd/MM/yyyy HH:mm"
-                    )}
+                    {format(new Date(firstPost.published_at), "dd/MM/yyyy")}
                   </div>
                 </li>
-                <li className="list-inline-item">
+                <li className="list-inline-item text-[12px]">
                   {getReadingTime(firstPost.content?.blocks || [])} phút đọc
                 </li>
               </ul>
@@ -96,7 +93,7 @@ const PopularPosts = async () => {
                   </h6>
                   <ul className="meta list-inline mt-1 mb-0">
                     <li className="list-inline-item">
-                      {format(new Date(post.published_at), "dd/MM/yyyy HH:mm")}
+                      {format(new Date(post.published_at), "dd/MM/yyyy")}
                     </li>
                   </ul>
                 </div>

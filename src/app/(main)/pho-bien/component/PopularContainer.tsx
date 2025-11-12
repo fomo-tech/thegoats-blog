@@ -73,16 +73,18 @@ const PopularContainer = () => {
                         </Link>
                       </li>
                       <li className="list-inline-item">
-                        {format(
-                          new Date(post.published_at),
-                          "dd/MM/yyyy HH:mm"
-                        )}
+                        {format(new Date(post.published_at), "dd/MM/yyyy")}
                       </li>
                     </ul>
                     <h5 className="post-title">
                       <Link href={`/${post.slug}`}>{post.title}</Link>
                     </h5>
-                    <p className="excerpt mb-0">{post.excerpt}</p>
+                    {post.excerpt && (
+                      <p className="excerpt mb-0 line-clamp-3">
+                        {post.excerpt}
+                      </p>
+                    )}
+
                     <div className="post-bottom clearfix d-flex align-items-center">
                       {/* <div className="social-share me-auto">
                         <button className="toggle-button icon-share" />

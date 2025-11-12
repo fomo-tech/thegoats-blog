@@ -57,7 +57,9 @@ const TrendingPosts = async () => {
       <h5 className="post-title mb-3 mt-3">
         <Link href={`/${post.slug}`}>{post.title}</Link>
       </h5>
-      {post.excerpt && <p className="excerpt mb-0">{post.excerpt}</p>}
+      {post.excerpt && (
+        <p className="excerpt mb-0 line-clamp-3">{post.excerpt}</p>
+      )}
     </div>
   );
 

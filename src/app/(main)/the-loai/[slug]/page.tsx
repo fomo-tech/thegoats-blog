@@ -19,7 +19,7 @@ const CategoryPage = async ({ params }: CategoryPageProps) => {
       <PageHeader
         title={category?.name}
         breadcrumbs={[
-          { label: "Home", href: "/" },
+          { label: "Trang chủ", href: "/" },
           { label: category?.name, href: `/the-loai/${category.slug}` },
         ]}
       />

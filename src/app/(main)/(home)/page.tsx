@@ -20,7 +20,9 @@ const HomePage = () => {
         />
         {/* horizontal ads */}
         <div className="ads-horizontal text-md-center">
-          <span className="ads-title">- Sponsored Ad -</span>
+          <span className="ads-title !text-[10px]">
+            - Quảng cáo được tài trợ -
+          </span>
           <a href="index.html#">
             <img src="https://placehold.co/800x120" alt="Advertisement" />
           </a>

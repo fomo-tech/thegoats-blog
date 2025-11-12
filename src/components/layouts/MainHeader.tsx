@@ -29,6 +29,7 @@ const menuItems = [
     label: "Kiến thức",
     href: "javascript:void(0)",
     submenu: [
+      { label: "Kiến thức tổng hợp", href: "/the-loai/kien-thuc" },
       { label: "Phân tích kỹ thuật", href: "/the-loai/phan-tich-ky-thuat" },
       { label: "Phân tích cơ bản", href: "/the-loai/phan-tich-co-ban" },
     ],

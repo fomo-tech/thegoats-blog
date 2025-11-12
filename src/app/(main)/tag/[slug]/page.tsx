@@ -19,7 +19,7 @@ const TagPage = async ({ params }: TagPageProps) => {
       <PageHeader
         title={`#${tag?.name}`}
         breadcrumbs={[
-          { label: "Home", href: "/" },
+          { label: "Trang chủ", href: "/" },
           { label: `#${tag?.name}`, href: `/tag/${tag.slug}` },
         ]}
       />

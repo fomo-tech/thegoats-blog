@@ -12,7 +12,7 @@ const SearchPage = async ({ searchParams }: { searchParams: SearchParams }) => {
       <PageHeader
         title={"Tìm kiếm"}
         breadcrumbs={[
-          { label: "Home", href: "/" },
+          { label: "Trang chủ", href: "/" },
           { label: "Tìm kiếm cho #" + keyword },
         ]}
       />
