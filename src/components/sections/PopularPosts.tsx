@@ -7,7 +7,7 @@ import React from "react";
 
 const PopularPosts = async () => {
   const { data } = await getPopularPosts({
-    limit: 6,
+    limit: 5,
   });
 
   if (!data || data.length === 0) return null;
@@ -72,7 +72,7 @@ const PopularPosts = async () => {
               <h5 className="post-title mb-3 mt-3">
                 <Link href={`/${firstPost.slug}`}>{firstPost.title}</Link>
               </h5>
-              <p className="excerpt mb-0">{firstPost.excerpt}</p>
+              <p className="excerpt mb-0 line-clamp-3">{firstPost.excerpt}</p>
             </div>
           </div>
 

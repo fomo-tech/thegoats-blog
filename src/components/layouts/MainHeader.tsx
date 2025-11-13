@@ -39,7 +39,7 @@ const menuItems = [
     href: "javascript:void(0)",
     submenu: [
       { label: "Hướng dẫn", href: "/the-loai/huong-dan" },
-      { label: "Thuật ngữ crypto", href: "/the-loai-thuat-ngu-crypto" },
+      { label: "Thuật ngữ crypto", href: "/the-loai/thuat-ngu-crypto" },
       { label: "Top sàn giao dịch", href: "/the-loai/top-san-giao-dich" },
     ],
   },
